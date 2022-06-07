@@ -1,0 +1,99 @@
+import React, { useEffect, useState, createRef, useRef } from "react";
+
+const words = ["du", "ipsum", "dolor"];
+
+const PositionWords = () => {
+  const lineStyle = {
+    display: "flex",
+    marginLeft: 150,
+  };
+
+  const wordStyle = {
+    backgroundColor: "#5AC8F5",
+    fontSize: 18,
+    color: "#fff",
+    padding: "7.5px 10px",
+    borderRadius: 7.5,
+    cursor: "pointer",
+    position: "relative",
+    top: 0,
+    left: 0,
+  };
+
+  const wordRefs = words.map(() => createRef(null));
+
+  const handleMove = (initEvent, index) => {
+    const element = initEvent.target;
+
+    const elementX = element.getBoundingClientRect().left;
+    const elementY = element.getBoundingClientRect().top;
+
+    const cursorX = initEvent.clientX - elementX;
+    const cursorY = initEvent.clientY - elementY;
+
+    const styleX = parseFloat(element.style.left);
+    const styleY = parseFloat(element.style.top);
+
+    element.style.zIndex = "1000";
+
+    let leftPos = elementX;
+
+    const moveElement = (moveEvent) => {
+      element.style.left =
+        moveEvent.clientX - elementX - cursorX + styleX + "px";
+      element.style.top =
+        moveEvent.clientY - elementY - cursorY + styleY + "px";
+
+      for (let i = 0; i < wordRefs.length; i++) {
+        if (i === index) continue;
+
+        if (
+          moveEvent.clientX >
+            wordRefs[i].current.getBoundingClientRect().left &&
+          moveEvent.clientX < wordRefs[i].current.getBoundingClientRect().right
+        ) {
+          const temp =
+            leftPos + wordRefs[i].current.getBoundingClientRect().width;
+
+          wordRefs[i].current.style.left =
+            leftPos -
+            wordRefs[i].current.getBoundingClientRect().left +
+            parseFloat(wordRefs[i].current.style.left) +
+            "px";
+
+          leftPos = temp;
+          break;
+        }
+      }
+    };
+
+    const endMove = (endEvent) => {
+      element.style.zIndex = "1";
+
+      element.style.top = 0 + "px";
+
+      document.removeEventListener("mousemove", moveElement);
+      document.removeEventListener("mouseup", endMove);
+    };
+
+    document.addEventListener("mousemove", moveElement);
+    document.addEventListener("mouseup", endMove);
+  };
+
+  return (
+    <div className="line" style={lineStyle}>
+      {words.map((item, index) => (
+        <div
+          className="word"
+          ref={wordRefs[index]}
+          onMouseDown={(e) => handleMove(e, index)}
+          style={wordStyle}
+        >
+          {item}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default PositionWords;

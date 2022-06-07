@@ -1,0 +1,112 @@
+.game3 {
+  margin-top: 110px;
+  width: 1000px;
+}
+.game3 .combine-wrapper {
+  display: flex;
+  margin-left: 50px;
+  gap: 25px;
+  margin-bottom: 50px;
+}
+.game3 .combine-wrapper .combine-item .combine-words {
+  display: flex;
+  gap: 15px;
+}
+.game3 .combine-wrapper .combine-item .combine-words .word {
+  background-color: #d6d9db;
+  padding: 10px 7.5px;
+  font-size: 18px;
+  border-radius: 7.5px;
+  transition: 0.75s linear;
+}
+.game3 .combine-wrapper .combine-item .curly {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 150px;
+  margin: auto;
+  color: #798388;
+  line-height: 30%;
+  transform: rotate(90deg);
+  transition: 0.75s linear;
+}
+.game3 .combine-wrapper .combine-item .result {
+  background-color: #d6d9db;
+  padding: 10px 7.5px;
+  font-size: 18px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: auto;
+  border-radius: 7.5px;
+  transition: 0.75s linear;
+}
+.game3 .combine-wrapper .combine-item .result span:first-child {
+  color: #eb6501;
+}
+.game3 .combine-wrapper .combine-item .bold span:last-child {
+  font-weight: bold;
+}
+.game3 .desc {
+  margin-left: 285px;
+  font-size: 20px;
+  transition: 0.75s linear;
+}
+.game3 .interactive-wrapper {
+  display: flex;
+  gap: 50px;
+  -webkit-margin-start: 100px;
+          margin-inline-start: 100px;
+  margin-top: 50px;
+}
+.game3 .interactive-box {
+  background-color: #bbc0c3;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 15px 20px;
+  max-height: 300px;
+  transition: 0.3s linear;
+}
+.game3 .interactive-box .interactive-line {
+  display: flex;
+  gap: 10px;
+  margin-top: 12.5px;
+  align-items: center;
+}
+.game3 .interactive-box .interactive-line .blank {
+  border-radius: 5px;
+  background-color: #fff;
+  width: 75px;
+  height: 25px;
+}
+.game3 .boxes {
+  margin-top: 15px;
+  display: flex;
+  gap: 25px;
+}
+.game3 .boxes .word-box {
+  border-radius: 5px;
+  background-color: #5ac8f5;
+  width: 75px;
+  height: 25px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s box-shadow linear;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.game3 .boxes .word-box:hover {
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+}
+.game3 .boxes .finish {
+  background-color: #a0c814;
+  cursor: default;
+  box-shadow: initial;
+}
+.game3 .boxes .finish:hover {
+  box-shadow: initial;
+}

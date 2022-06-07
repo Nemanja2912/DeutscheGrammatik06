@@ -1,0 +1,433 @@
+.menu {
+  background-color: #a0c814;
+  height: 100vh;
+  width: 100vw;
+  padding-left: 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000000;
+  transition: 1s;
+  overflow: hidden;
+}
+.menu .top {
+  padding-top: 15vh;
+  transition: 1s;
+}
+.menu .top p {
+  font-size: 35px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 1s;
+}
+.menu .title {
+  color: #fff;
+  cursor: pointer;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  text-transform: uppercase;
+  line-height: 60px;
+}
+.menu .subtitle {
+  color: #374105;
+  text-transform: uppercase;
+  line-height: 20px;
+}
+.menu .text {
+  color: #fff;
+  font-size: 18px;
+  margin-top: 30px;
+  font-weight: 700;
+  transition: 1s;
+}
+.menu .button {
+  font-size: 25px;
+  background-color: #fff;
+  color: #788287;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  font-weight: 700;
+  margin-top: 20px;
+  padding: 20px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  -webkit-animation-name: buttonShow;
+          animation-name: buttonShow;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  opacity: 0;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  transition: 0.5s;
+}
+.menu .button:hover {
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+}
+.menu .info {
+  position: absolute;
+  top: 10px;
+  right: 2.5vw;
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  text-align: right;
+}
+.menu .info img {
+  transition: 1s;
+  width: 60%;
+}
+.menu .info-small {
+  font-size: 12px;
+  top: 10px;
+  line-height: 18px;
+}
+.menu .info-small img {
+  width: 60%;
+}
+.menu .bottom {
+  position: absolute;
+  bottom: 25px;
+  right: 2.5vw;
+  text-align: right;
+  transition: 0.5s;
+  transition-delay: 0.2s;
+}
+.menu .bottom p {
+  font-weight: 700;
+  color: #374105;
+  font-size: 15px;
+  cursor: pointer;
+}
+.menu .bottom p:first-child {
+  margin-bottom: 5px;
+}
+
+.bottomHide {
+  opacity: 0;
+  transition-delay: 0s !important;
+}
+
+.move {
+  padding-top: 1vh !important;
+}
+.move p {
+  font-size: 20px !important;
+}
+.move .title {
+  opacity: 0;
+  line-height: 10px;
+}
+
+.move2 {
+  padding-top: 0px !important;
+}
+.move2 .subtitle {
+  margin-top: 0px;
+}
+.move2 p {
+  font-size: 15px !important;
+}
+
+.hidden {
+  opacity: 0;
+  -webkit-animation-name: hide;
+          animation-name: hide;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.buttonHidden {
+  display: none;
+}
+
+.next {
+  display: none;
+  margin-top: 0px;
+  transition: 1s;
+  opacity: 0;
+}
+.next .title {
+  font-size: 20px;
+  font-weight: 700;
+  transition: 1s;
+  line-height: 28px;
+}
+.next .subtitle {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+.next p {
+  font-size: 20px;
+}
+
+.button2 {
+  opacity: 0;
+  font-size: 25px;
+  background-color: #fff;
+  color: #788287;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  font-weight: 700;
+  margin-top: 50px;
+  padding: 20px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: 0.5s;
+}
+.button2:hover {
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+}
+
+.nextShow {
+  display: block;
+  -webkit-animation-name: textAppear;
+          animation-name: textAppear;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.nextShow2 {
+  display: block;
+  opacity: 1;
+}
+.nextShow2 .title {
+  font-size: 15px;
+}
+.nextAnimation {
+  margin-top: 100px;
+  -webkit-animation-name: textMoveBack;
+          animation-name: textMoveBack;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.nextShow3 {
+  display: block;
+  opacity: 1;
+  margin-top: 0px !important;
+}
+.nextShow3 .title {
+  font-size: 15px;
+  transition: 1s;
+  -webkit-animation-name: fontIncrease;
+          animation-name: fontIncrease;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  color: rgba(255, 255, 255, 0.712);
+}
+.titleReduce {
+  font-size: 20px;
+  -webkit-animation-name: fontDecrease;
+          animation-name: fontDecrease;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.active {
+  opacity: 1 !important;
+  color: #fff !important;
+}
+
+.menu-small {
+  height: 65px;
+}
+
+.menu-medium {
+  height: 200px;
+}
+
+.full-menu {
+  height: 100%;
+}
+
+.arrow img {
+  width: 30px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 7px;
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.5s;
+  transition-delay: 1s;
+}
+
+.imageShow {
+  opacity: 1 !important;
+}
+
+@-webkit-keyframes fontIncrease {
+  0% {
+    font-size: 15px;
+  }
+  100% {
+    font-size: 20px;
+  }
+}
+
+@keyframes fontIncrease {
+  0% {
+    font-size: 15px;
+  }
+  100% {
+    font-size: 20px;
+  }
+}
+@-webkit-keyframes fontDecrease {
+  0% {
+    font-size: 20px;
+  }
+  100% {
+    font-size: 15px;
+  }
+}
+@keyframes fontDecrease {
+  0% {
+    font-size: 20px;
+  }
+  100% {
+    font-size: 15px;
+  }
+}
+@-webkit-keyframes buttonShow {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes buttonShow {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes textAppear {
+  0% {
+    opacity: 0;
+    margin-top: 0px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 100px;
+  }
+}
+@keyframes textAppear {
+  0% {
+    opacity: 0;
+    margin-top: 0px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 100px;
+  }
+}
+@-webkit-keyframes textMoveBack {
+  0% {
+    margin-top: 100px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}
+@keyframes textMoveBack {
+  0% {
+    margin-top: 100px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}
+.titles {
+  overflow: hidden;
+  height: 22px;
+  transition: 1s;
+}
+
+.titles-small {
+  height: 20px;
+}
+
+.titles-full {
+  height: 150px;
+}
+
+.credits {
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: 0.5s;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10000000;
+  padding: 25px 25px 5vw 5vw;
+  font-size: 20px;
+  line-height: 32px;
+}
+.credits .close img {
+  position: absolute;
+  right: 5vw;
+  width: 30px;
+  height: 30px;
+  padding: 7.5px;
+  border-radius: 50%;
+  background-color: #788287;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.credits .close img:hover {
+  transform: rotate(90deg) scale(1.1);
+}
+
+.credits-opacity {
+  opacity: 1;
+  pointer-events: inherit;
+}

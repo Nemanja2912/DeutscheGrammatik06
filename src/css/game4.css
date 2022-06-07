@@ -1,0 +1,37 @@
+.game4 {
+  margin-top: 110px;
+  width: 1000px;
+}
+.game4 .dropdown .list {
+  display: flex;
+  flex-direction: column;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  background-color: #5ac8f5;
+  text-align: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.1s linear;
+  font-weight: 400;
+}
+.game4 .dropdown .list p {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 10px;
+  transition: 0.3s linear;
+}
+.game4 .dropdown .list p img {
+  height: 12px;
+}
+.game4 .dropdown .list p:hover {
+  background-color: rgba(255, 255, 255, 0.199);
+}
+.game4 .dropdown .done {
+  cursor: default;
+  background-color: transparent;
+  color: #a0c814;
+  font-weight: bold;
+}

@@ -1,0 +1,294 @@
+.game1 {
+  // margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 1000px;
+  position: relative;
+
+  .card {
+    background-color: #d6d9db;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .question-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: 0 auto;
+    height: max-content;
+    width: max-content;
+    transition: 0.5s linear;
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    .question-box {
+      width: 700px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 0 20px;
+      grid-template-areas: ". ." ". description";
+
+      .question {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      input {
+        width: 300px;
+        background-color: #5ac8f5;
+        border: 0px solid;
+        padding: 10px 7.5px;
+        border-radius: 10px;
+        font-size: 18px;
+
+        &:focus {
+          border: 0px;
+          outline: 0px;
+        }
+      }
+
+      .description {
+        font-size: 14px;
+        opacity: 0.6;
+        margin-top: 5px;
+        grid-area: description;
+      }
+    }
+  }
+
+  .personal-question {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: max-content;
+    margin: auto;
+    transition: 0.5s linear;
+  }
+
+  .button-show {
+    bottom: initial !important;
+  }
+
+  .radio-button-card {
+    .label {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      font-size: 20px;
+    }
+    .radio-button-question {
+      display: flex;
+      align-items: center;
+      width: 400px;
+      justify-content: space-between;
+
+      .question {
+        font-size: 18px;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 25px;
+      }
+
+      input {
+        width: 25px;
+      }
+
+      input:focus {
+        outline: 0px;
+      }
+
+      input[type="radio"]:after {
+        width: 20px;
+        height: 20px;
+        border-radius: 15px;
+        top: -3px;
+        left: -2px;
+        position: relative;
+        background-color: white;
+        content: "";
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid #bbc0c3;
+        cursor: pointer;
+      }
+
+      input[type="radio"]:checked:after {
+        width: 20px;
+        height: 20px;
+        border-radius: 15px;
+        top: -3px;
+        left: -2px;
+        position: relative;
+        background-color: #a0c814;
+        content: "";
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid #bbc0c3;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .radio-wrapper {
+    position: relative;
+    transition: 0.5s linear;
+  }
+
+  .persons {
+    display: flex;
+    gap: 25px;
+    position: relative;
+    transition: 0.5s linear;
+
+    .person-wrapper {
+      position: relative;
+      top: 0px;
+      left: 0px;
+      bottom: 0px;
+      right: 0px;
+      transition: 0.5s linear;
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      border-radius: 10px;
+
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+      }
+
+      .person-card {
+        padding: 20px;
+        width: 275px;
+        pointer-events: none;
+
+        .top {
+          display: flex;
+          gap: 15px;
+          margin-bottom: 15px;
+
+          .image {
+            width: 75px;
+            height: 90px;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+
+          .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+        }
+
+        .additional {
+          display: flex;
+          gap: 15px;
+          flex-direction: column;
+        }
+      }
+    }
+  }
+
+  .check-wrapper {
+    display: flex;
+    gap: 25px;
+    margin-top: -25px;
+    margin-left: 125px;
+    position: relative;
+    transition: 1s linear;
+    top: 0;
+
+    .count {
+      font-size: 18px;
+      background-color: #a0c814;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      margin-top: 7.5px;
+    }
+
+    .check-card-wrapper {
+      width: 275px;
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+
+      .check-card {
+        width: max-content;
+
+        .card {
+          padding: 25px 0;
+          gap: 0px;
+        }
+
+        .name {
+          text-align: center;
+          margin-bottom: 10px;
+          font-size: 20px;
+        }
+
+        .label {
+          display: flex;
+          justify-content: flex-end;
+          gap: 15px;
+          font-size: 17px;
+          padding: 0 25px;
+        }
+
+        .single-check {
+          display: flex;
+          justify-content: space-between;
+          padding: 7.5px 0;
+          padding-right: 32px;
+          padding-left: 27px;
+
+          .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 15px;
+            background-color: white;
+            display: inline-block;
+            border: 2px solid #bbc0c3;
+          }
+
+          .circle-checked {
+            background-color: #a0c814;
+          }
+        }
+      }
+    }
+
+    .single-wrapper {
+      width: max-content;
+    }
+  }
+}

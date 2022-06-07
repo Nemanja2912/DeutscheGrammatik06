@@ -1,0 +1,27 @@
+const handleMove = (initEvent) => {
+    const element = initEvent.target;
+
+    const elementX = element.getBoundingClientRect().left;
+    const elementY = element.getBoundingClientRect().top;
+
+    const cursorX = initEvent.clientX - elementX;
+    const cursorY = initEvent.clientY - elementY;
+
+    const styleX = parseFloat(element.style.left);
+    const styleY = parseFloat(element.style.top);
+
+    const moveElement = (moveEvent) => {
+      element.style.left =
+        moveEvent.clientX - elementX - cursorX + styleX + "px";
+      element.style.top =
+        moveEvent.clientY - elementY - cursorY + styleY + "px";
+    };
+
+    const endMove = (endEvent) => {
+      document.removeEventListener("mousemove", moveElement);
+      document.removeEventListener("mouseup", endMove);
+    };
+
+    document.addEventListener("mousemove", moveElement);
+    document.addEventListener("mouseup", endMove);
+  };

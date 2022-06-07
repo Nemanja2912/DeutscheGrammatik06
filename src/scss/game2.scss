@@ -1,0 +1,275 @@
+.game2 {
+  margin-top: 100px;
+  width: 1000px;
+  position: relative;
+
+  .item-group {
+    display: flex;
+    gap: 50px;
+    justify-content: space-evenly;
+    padding-top: 100px;
+    position: absolute;
+    top: 0;
+    left: -100vw;
+    right: 50vw;
+    bottom: 0;
+    transition: 0.25s linear;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .show-group {
+    left: 0;
+    right: 0;
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  .item {
+    width: max-content;
+
+    .wrapper {
+      width: max-content;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 25px;
+
+      img {
+        width: 100px;
+      }
+
+      .desc {
+        background-color: #5ac8f5;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 10px 15px;
+        text-align: center;
+      }
+    }
+
+    .item-results {
+      display: flex;
+      gap: 20px;
+
+      .result-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        top: -125px;
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.75);
+        transition: 0.3s linear;
+
+        .result-desc {
+          font-size: 18px;
+          padding: 10px 15px;
+          text-align: center;
+          background-color: #ededed;
+        }
+
+        img {
+          width: 100px;
+        }
+      }
+
+      .result-item:first-child {
+        left: 75px;
+      }
+
+      .result-item:last-child {
+        left: -75px;
+      }
+
+      .show {
+        top: 0;
+        left: 0 !important;
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      .movable {
+        position: relative;
+        transition: 0.5s linear;
+        color: #ec6603;
+      }
+    }
+  }
+
+  .scissors-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-70deg);
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  .scissors-container .scissors {
+    position: relative;
+    height: 2.1875em;
+    width: 8em;
+  }
+
+  .scissors-container .half {
+    width: 8em;
+    height: 1.25em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform-origin: 41.79688% 100% 0;
+    transform: rotate(10deg);
+  }
+
+  .active-scissors .half {
+    animation: rot-up 0.3s ease-out;
+  }
+
+  .active-scissors .half:nth-child(even) {
+    animation: rot-down 0.3s ease-out;
+  }
+
+  .scissors-container .half:nth-child(even) {
+    top: 0.9375em;
+    transform-origin: 41.79688% 0% 0;
+    transform: rotate(-10deg);
+  }
+
+  .scissors-container .half:nth-child(even) .blade {
+    top: 0;
+    border-radius: 0 0.3125em 0 0;
+  }
+
+  .scissors-container .half:nth-child(even) .blade:after {
+    top: 0.3125em;
+    border-style: solid;
+    border-width: 0.3125em 0.625em 0 0.625em;
+    border-color: #c2c6c9 transparent transparent transparent;
+  }
+
+  @keyframes rot-up {
+    0% {
+      transform: rotate(10deg);
+    }
+    50% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(10deg);
+    }
+  }
+  @keyframes rot-down {
+    0% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-10deg);
+    }
+  }
+
+  .scissors-container .joint {
+    width: 0.21875em;
+    height: 0.21875em;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 0.98438em;
+    left: 41.66016%;
+  }
+
+  .scissors-container .handle {
+    width: 2.5em;
+    height: 1.25em;
+    border-radius: 0.625em;
+    border: 0.3125em solid #c2c6c9;
+    background: rgba(255, 255, 255, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+  }
+
+  .scissors-container .blade {
+    width: 5em;
+    height: 0.3125em;
+    position: absolute;
+    top: 0.9375em;
+    left: 2.5em;
+    background: #c2c6c9;
+    border-radius: 0 0 0.3125em 0;
+  }
+  .scissors-container .blade:before {
+    content: "";
+    width: 1.25em;
+    height: 0.3125em;
+    background: #c2c6c9;
+    position: absolute;
+    top: 0;
+    left: -1.25em;
+  }
+  .scissors-container .blade:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0.625em 0.3125em 0.625em;
+    border-color: transparent transparent #c2c6c9 transparent;
+    position: absolute;
+    top: -0.3125em;
+    left: -0.625em;
+  }
+
+  .group-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    position: relative;
+    pointer-events: none;
+    transition: 0.25s linear;
+
+    .line {
+      display: flex;
+      justify-content: space-evenly;
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+
+        .main {
+          background-color: #5ac8f5;
+          font-size: 18px;
+          padding: 10px 15px;
+          text-align: center;
+        }
+
+        .results {
+          display: flex;
+          gap: 20px;
+
+          .text {
+            font-size: 18px;
+            padding: 10px 15px;
+            text-align: center;
+            background-color: #ededed;
+          }
+
+          .text:last-child {
+            span:first-child {
+              color: #ec6603;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+.game3 {
+  margin-top: 110px;
+  width: 1000px;
+
+  .combine-wrapper {
+    display: flex;
+    margin-left: 50px;
+    gap: 25px;
+    margin-bottom: 50px;
+
+    .combine-item {
+      .combine-words {
+        display: flex;
+        gap: 15px;
+
+        .word {
+          background-color: #d6d9db;
+          padding: 10px 7.5px;
+          font-size: 18px;
+          border-radius: 7.5px;
+          transition: 0.75s linear;
+        }
+      }
+
+      .curly {
+        width: max-content;
+        font-size: 150px;
+        margin: auto;
+        color: #798388;
+        line-height: 30%;
+        transform: rotate(90deg);
+        transition: 0.75s linear;
+      }
+
+      .result {
+        background-color: #d6d9db;
+        padding: 10px 7.5px;
+        font-size: 18px;
+        width: max-content;
+        margin: auto;
+        border-radius: 7.5px;
+        transition: 0.75s linear;
+
+        span:first-child {
+          color: #eb6501;
+        }
+      }
+
+      .bold {
+        span:last-child {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .desc {
+    margin-left: 285px;
+    font-size: 20px;
+    transition: 0.75s linear;
+  }
+  .interactive-wrapper {
+    display: flex;
+    gap: 50px;
+    margin-inline-start: 100px;
+    margin-top: 50px;
+  }
+
+  .interactive-box {
+    background-color: #bbc0c3;
+    border-radius: 5px;
+    width: max-content;
+    padding: 15px 20px;
+    max-height: 300px;
+    transition: 0.3s linear;
+
+    .interactive-line {
+      display: flex;
+      gap: 10px;
+      margin-top: 12.5px;
+      align-items: center;
+
+      .blank {
+        border-radius: 5px;
+        background-color: #fff;
+        width: 75px;
+        height: 25px;
+      }
+    }
+  }
+
+  .boxes {
+    margin-top: 15px;
+    display: flex;
+    gap: 25px;
+
+    .word-box {
+      border-radius: 5px;
+      background-color: #5ac8f5;
+      width: 75px;
+      height: 25px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.5s box-shadow linear;
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+      }
+    }
+
+    .finish {
+      background-color: #a0c814;
+      cursor: default;
+      box-shadow: initial;
+
+      &:hover {
+        box-shadow: initial;
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+.game5 {
+  // margin-top: 110px;
+  width: 1000px;
+  overflow: hidden;
+  height: 100vh;
+  padding-top: 110px;
+  position: relative;
+
+  .shaddow {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 75px;
+    z-index: 1000;
+    background-image: linear-gradient(
+      to bottom,
+      #fff 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .chat-wrapper,
+  .wrapper-chatbox {
+    animation-name: show;
+    animation-duration: 1s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    transition: 0.5s;
+    bottom: 0;
+  }
+
+  .wrapper-chatbox {
+    margin-left: 50px;
+    animation-delay: 1s;
+  }
+
+  @keyframes show {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .chat-boxes {
+    margin-left: 50px;
+    .chat-box {
+      display: flex;
+
+      .name {
+        color: #fff;
+        border-radius: 20px 0 0 0;
+        padding: 10px 20px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+        font-size: 18px;
+        font-weight: bold;
+        transition: 0.5s linear;
+        transition-delay: 1s;
+      }
+
+      .message {
+        font-size: 20px;
+        padding: 10px 20px;
+        border-radius: 0 10px 10px 0;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        width: 750px;
+        transition: 0.5s linear;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition-delay: 1s;
+
+        .line {
+          transition: 0.5s linear;
+          transition-delay: 2s;
+        }
+      }
+    }
+
+    .hide {
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: 0.5s;
+      transition-delay: 0.5s;
+    }
+
+    .position--words {
+      margin-top: 50px;
+    }
+  }
+}

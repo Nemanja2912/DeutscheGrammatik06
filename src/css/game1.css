@@ -1,0 +1,263 @@
+.game1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 1000px;
+  position: relative;
+}
+.game1 .card {
+  background-color: #d6d9db;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.game1 .question-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 0 auto;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  transition: 0.5s linear;
+  /* Firefox */
+}
+.game1 .question-card input::-webkit-outer-spin-button,
+.game1 .question-card input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.game1 .question-card input[type=number] {
+  -moz-appearance: textfield;
+}
+.game1 .question-card .question-box {
+  width: 700px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 0 20px;
+  grid-template-areas: ". ." ". description";
+}
+.game1 .question-card .question-box .question {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.game1 .question-card .question-box input {
+  width: 300px;
+  background-color: #5ac8f5;
+  border: 0px solid;
+  padding: 10px 7.5px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+.game1 .question-card .question-box input:focus {
+  border: 0px;
+  outline: 0px;
+}
+.game1 .question-card .question-box .description {
+  font-size: 14px;
+  opacity: 0.6;
+  margin-top: 5px;
+  grid-area: description;
+}
+.game1 .personal-question {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: auto;
+  transition: 0.5s linear;
+}
+.game1 .button-show {
+  bottom: initial !important;
+}
+.game1 .radio-button-card .label {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  font-size: 20px;
+}
+.game1 .radio-button-card .radio-button-question {
+  display: flex;
+  align-items: center;
+  width: 400px;
+  justify-content: space-between;
+}
+.game1 .radio-button-card .radio-button-question .question {
+  font-size: 18px;
+}
+.game1 .radio-button-card .radio-button-question .buttons {
+  display: flex;
+  gap: 25px;
+}
+.game1 .radio-button-card .radio-button-question input {
+  width: 25px;
+}
+.game1 .radio-button-card .radio-button-question input:focus {
+  outline: 0px;
+}
+.game1 .radio-button-card .radio-button-question input[type=radio]:after {
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  top: -3px;
+  left: -2px;
+  position: relative;
+  background-color: white;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid #bbc0c3;
+  cursor: pointer;
+}
+.game1 .radio-button-card .radio-button-question input[type=radio]:checked:after {
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  top: -3px;
+  left: -2px;
+  position: relative;
+  background-color: #a0c814;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid #bbc0c3;
+  cursor: pointer;
+}
+.game1 .radio-wrapper {
+  position: relative;
+  transition: 0.5s linear;
+}
+.game1 .persons {
+  display: flex;
+  gap: 25px;
+  position: relative;
+  transition: 0.5s linear;
+}
+.game1 .persons .person-wrapper {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  transition: 0.5s linear;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+}
+.game1 .persons .person-wrapper:hover {
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+}
+.game1 .persons .person-wrapper .person-card {
+  padding: 20px;
+  width: 275px;
+  pointer-events: none;
+}
+.game1 .persons .person-wrapper .person-card .top {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.game1 .persons .person-wrapper .person-card .top .image {
+  width: 75px;
+  height: 90px;
+}
+.game1 .persons .person-wrapper .person-card .top .image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.game1 .persons .person-wrapper .person-card .top .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.game1 .persons .person-wrapper .person-card .additional {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+}
+.game1 .check-wrapper {
+  display: flex;
+  gap: 25px;
+  margin-top: -25px;
+  margin-left: 125px;
+  position: relative;
+  transition: 1s linear;
+  top: 0;
+}
+.game1 .check-wrapper .count {
+  font-size: 18px;
+  background-color: #a0c814;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 7.5px;
+}
+.game1 .check-wrapper .check-card-wrapper {
+  width: 275px;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+}
+.game1 .check-wrapper .check-card-wrapper .check-card {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.game1 .check-wrapper .check-card-wrapper .check-card .card {
+  padding: 25px 0;
+  gap: 0px;
+}
+.game1 .check-wrapper .check-card-wrapper .check-card .name {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.game1 .check-wrapper .check-card-wrapper .check-card .label {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  font-size: 17px;
+  padding: 0 25px;
+}
+.game1 .check-wrapper .check-card-wrapper .check-card .single-check {
+  display: flex;
+  justify-content: space-between;
+  padding: 7.5px 0;
+  padding-right: 32px;
+  padding-left: 27px;
+}
+.game1 .check-wrapper .check-card-wrapper .check-card .single-check .circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  background-color: white;
+  display: inline-block;
+  border: 2px solid #bbc0c3;
+}
+.game1 .check-wrapper .check-card-wrapper .check-card .single-check .circle-checked {
+  background-color: #a0c814;
+}
+.game1 .check-wrapper .single-wrapper {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
