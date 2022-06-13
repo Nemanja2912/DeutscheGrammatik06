@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import DetailsBox from "../UI/DetailsBox";
 import InteractiveLine from "./InteractiveLine";
-import MovableItem from "./MovableItem";
+import MovableItem from "../UI/MovableItem";
 
 const InteractiveBox = ({
   content,

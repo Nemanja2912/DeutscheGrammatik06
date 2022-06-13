@@ -2,9 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import Arrow from "../assets/img/arrow_down_white.svg";
 
-const options = ["der", "die", "das"];
-
-const Dropdown = ({ done = false }) => {
+const Dropdown = ({ done, options }) => {
   const [open, setOpen] = useState(false);
   const [choose, setChoose] = useState(false);
 
@@ -21,7 +19,10 @@ const Dropdown = ({ done = false }) => {
       <div
         ref={listRef}
         className={`list ${done && "done"}`}
-        style={{ height: open ? listRef.current.scrollHeight : 45 }}
+        style={{
+          height: open ? listRef.current.scrollHeight : 37.4,
+          zIndex: open ? 1000 : 1,
+        }}
       >
         <p onClick={handleOpen} className="show">
           {choose ? choose : <img src={Arrow} alt="" />}

@@ -1,95 +1,126 @@
 .game5 {
-  // margin-top: 110px;
+  margin-top: 110px;
   width: 1000px;
-  overflow: hidden;
-  height: 100vh;
-  padding-top: 110px;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid red;
 
-  .shaddow {
-    position: absolute;
-    top: 65px;
+  .image {
+    margin-bottom: 25px;
+    img {
+      width: 300px;
+    }
+  }
+
+  span {
+    padding: 2.5px;
+    border-radius: 5px;
+    transition: 0.5s linear;
+    position: relative;
     left: 0;
-    right: 0;
-    width: 100%;
-    height: 75px;
-    z-index: 1000;
-    background-image: linear-gradient(
-      to bottom,
-      #fff 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    top: 0;
   }
 
-  .chat-wrapper,
-  .wrapper-chatbox {
-    animation-name: show;
-    animation-duration: 1s;
-    opacity: 0;
-    animation-fill-mode: forwards;
-    transition: 0.5s;
-    bottom: 0;
-  }
+  .drop-zones {
+    display: flex;
+    margin-bottom: 25px;
+    gap: 25px;
 
-  .wrapper-chatbox {
-    margin-left: 50px;
-    animation-delay: 1s;
-  }
-
-  @keyframes show {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
-  }
-
-  .chat-boxes {
-    margin-left: 50px;
-    .chat-box {
+    .drop {
       display: flex;
+      position: relative;
 
-      .name {
-        color: #fff;
-        border-radius: 20px 0 0 0;
-        padding: 10px 20px;
-        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-        font-size: 18px;
-        font-weight: bold;
-        transition: 0.5s linear;
-        transition-delay: 1s;
+      .blank {
+        border: 3px solid #5ac8f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 150px;
+        font-size: 30px;
+        height: 75px;
+      }
+    }
+  }
+
+  .word-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    font-size: 20px;
+    height: 75px;
+    background-color: #d6d9db;
+  }
+
+  .interactive-word {
+    display: flex;
+    gap: 25px;
+
+    .word-box {
+      background-color: #5ac8f5;
+      cursor: pointer;
+      position: relative;
+      transition: 0.3s linear;
+
+      &:hover {
+        background-color: #92d8f5;
+      }
+    }
+
+    .finish {
+      background-color: #d6d9db;
+      cursor: default;
+      // border: 3px solid peru;
+
+      p {
+        position: relative;
       }
 
-      .message {
-        font-size: 20px;
-        padding: 10px 20px;
-        border-radius: 0 10px 10px 0;
-        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-        width: 750px;
-        transition: 0.5s linear;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        transition-delay: 1s;
+      &:hover {
+        background-color: #d6d9db;
+      }
+    }
+  }
 
-        .line {
-          transition: 0.5s linear;
-          transition-delay: 2s;
+  .clone-boxes {
+    display: flex;
+    position: absolute;
+    z-index: 100;
+
+    .background {
+      background-color: #d6d9db;
+      width: 300px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transition: 0.5s linear;
+      z-index: -1;
+    }
+
+    .box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      font-size: 20px;
+      height: 75px;
+
+      .choose {
+        background-color: #5ac8f5;
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+          background-color: hsla(197, 89%, 66%, 0.5) !important;
         }
       }
     }
 
-    .hide {
-      transform: translateY(-100%);
-      opacity: 0;
-      transition: 0.5s;
-      transition-delay: 0.5s;
-    }
-
-    .position--words {
-      margin-top: 50px;
+    .box-swipe {
+      order: 2;
     }
   }
 }

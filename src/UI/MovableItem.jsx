@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import Indicator from "./../UI/Indicator";
+import Indicator from "./Indicator";
 
-const MovableItem = ({ text, trueRef, finish, setFinish, wordRef }) => {
+const MovableItem = ({
+  text,
+  trueRef,
+  finish,
+  setFinish = () => {},
+  wordRef,
+}) => {
   const [activeIndicator, setActiveIndicator] = useState([]);
 
   const handleMove = (initEvent) => {
+    if (finish) return;
+
     const element = initEvent.target;
     element.style.transition = "0s";
     element.style.zIndex = "1000";
@@ -27,7 +35,7 @@ const MovableItem = ({ text, trueRef, finish, setFinish, wordRef }) => {
       document.removeEventListener("mouseup", endMove);
 
       if (
-        trueRef.current &&
+        trueRef?.current &&
         endEvent.clientX > trueRef.current.getBoundingClientRect().left &&
         endEvent.clientX < trueRef.current.getBoundingClientRect().right &&
         endEvent.clientY > trueRef.current.getBoundingClientRect().top &&
@@ -64,7 +72,7 @@ const MovableItem = ({ text, trueRef, finish, setFinish, wordRef }) => {
         style={{ position: "relative", left: 0, top: 0 }}
         ref={wordRef}
       >
-        {text}
+        <p style={{ pointerEvents: finish ? "initial" : "none" }}>{text}</p>
       </div>
 
       <Indicator active={activeIndicator} />
