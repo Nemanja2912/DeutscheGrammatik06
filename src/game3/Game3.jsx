@@ -63,8 +63,6 @@ const interactive = [
   },
 ];
 
-let firstTime = true;
-
 const Game3 = ({ nextLesson }) => {
   const [level, setLevel] = useState(-1);
 
@@ -76,12 +74,15 @@ const Game3 = ({ nextLesson }) => {
     "Sieh dir die Beispiele an und formuliere die Regel."
   );
   const [infoOverlay, setInfoOverlay] = useState(true);
+  const [firstTime, setFirstTime] = useState(true);
 
   const [activeIndicator, setActiveIndicator] = useState([]);
 
   useEffect(() => {
+    console.log(!firstTime, infoOverlay);
     if (!firstTime || infoOverlay) return;
-    firstTime = false;
+    console.log("inside");
+    setFirstTime(false);
 
     setLevel(0);
 

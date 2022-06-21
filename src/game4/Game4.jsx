@@ -29,7 +29,7 @@ const Game4 = ({ nextLesson }) => {
       Klicke sie an.
     </>
   );
-  const [infoOverlay, setInfoOverlay] = useState(false);
+  const [infoOverlay, setInfoOverlay] = useState(true);
 
   const [endButton, setEndButton] = useState(true);
   const [btnText, setBtnText] = useState("Prüfen");
@@ -239,9 +239,6 @@ const Game4 = ({ nextLesson }) => {
         </div>
 
         <p>Kommen Sie vorbei!</p>
-
-        {/* {answer.map((item, index) => (
-        ))} */}
       </div>
       <StatusBar
         infoText={infoText}
@@ -260,7 +257,13 @@ const Game4 = ({ nextLesson }) => {
           <div
             className="button-show"
             style={{ margin: "auto", left: 0, right: 0 }}
-            onClick={handleCheck}
+            onClick={() => {
+              if (btnText === "Weiter") {
+                nextLesson();
+              } else {
+                handleCheck();
+              }
+            }}
             ref={btnRef}
           >
             {btnText}

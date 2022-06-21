@@ -1,263 +1,355 @@
 .game1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top: 75px;
   height: 100vh;
   width: 1000px;
-  position: relative;
 }
-.game1 .card {
-  background-color: #d6d9db;
-  padding: 20px;
-  border-radius: 10px;
+@-webkit-keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.game1 .buttons .btn {
+  position: absolute;
+  z-index: 10000000;
+  background-color: #5ac8f5;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: 0.13s linear;
+  opacity: 1;
+}
+.game1 .buttons .red-bg {
+  background-color: #eb6400;
+}
+.game1 .buttons .green-bg {
+  background-color: #a0c814;
+}
+.game1 .buttons .hide {
+  opacity: 0 !important;
+}
+.game1 .buttons1 .btn1 {
+  top: 260px;
+  left: 400px;
+}
+.game1 .buttons1 .btn2 {
+  top: 475px;
+  left: 50px;
+}
+.game1 .buttons1 .btn3 {
+  top: 475px;
+  left: 275px;
+}
+.game1 .buttons1 .btn4 {
+  top: 500px;
+  left: 525px;
+}
+.game1 .buttons2 .btn1 {
+  top: 250px;
+  left: 480px;
+}
+.game1 .buttons2 .btn2 {
+  top: 380px;
+  left: 180px;
+}
+.game1 .buttons2 .btn3 {
+  top: 400px;
+  left: 420px;
+}
+.game1 .buttons2 .btn4 {
+  top: 450px;
+  left: 60px;
+}
+.game1 .buttons2 .btn5 {
+  top: 475px;
+  left: 250px;
+}
+.game1 .buttons2 .btn6 {
+  top: 500px;
+  left: 500px;
+}
+.game1 .buttons3 .btn1 {
+  top: 225px;
+  left: 40px;
+}
+.game1 .buttons3 .btn2 {
+  top: 300px;
+  left: 565px;
+}
+.game1 .buttons3 .btn3 {
+  top: 510px;
+  left: 60px;
+}
+.game1 .buttons3 .btn4 {
+  top: 400px;
+  left: 400px;
+}
+.game1 .buttons4 .btn1 {
+  top: 250px;
+  left: 550px;
+}
+.game1 .buttons4 .btn2 {
+  top: 350px;
+  left: 250px;
+}
+.game1 .buttons4 .btn3 {
+  top: 480px;
+  left: 60px;
+}
+.game1 .buttons4 .btn4 {
+  top: 450px;
+  left: 490px;
+}
+.game1 .cart {
+  width: 100px;
+  position: absolute;
+  top: 275px;
+  left: 700px;
+  transform: scaleX(-1);
+  transition: 0.625s linear;
+  transition-delay: 1875ms;
+}
+.game1 .cart-move {
+  left: 865px !important;
+}
+.game1 .stickman {
+  width: 65px;
+  position: absolute;
+  top: 560px;
+  z-index: 10000000;
+  -webkit-animation-duration: 2500ms;
+          animation-duration: 2500ms;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-name: stickman-walk;
+          animation-name: stickman-walk;
+}
+.game1 .stickman .leg {
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  transform-origin: left;
+}
+.game1 .stickman .leg-right {
+  -webkit-animation-name: walk2;
+          animation-name: walk2;
+}
+.game1 .stickman .leg-left {
+  -webkit-animation-name: walk1;
+          animation-name: walk1;
+}
+@-webkit-keyframes walk1 {
+  from {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  to {
+    transform: rotate(-25deg) translate(-10px, 10px);
+  }
+}
+@keyframes walk1 {
+  from {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  to {
+    transform: rotate(-25deg) translate(-10px, 10px);
+  }
+}
+@-webkit-keyframes walk2 {
+  from {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  to {
+    transform: rotate(25deg) translate(0px, -20px);
+  }
+}
+@keyframes walk2 {
+  from {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  to {
+    transform: rotate(25deg) translate(0px, -20px);
+  }
+}
+@-webkit-keyframes stickman-walk {
+  0% {
+    left: -50px;
+  }
+  75% {
+    left: 635px;
+  }
+  100% {
+    left: 800px;
+  }
+}
+@keyframes stickman-walk {
+  0% {
+    left: -50px;
+  }
+  75% {
+    left: 635px;
+  }
+  100% {
+    left: 800px;
+  }
+}
+.game1 .nav-group {
+  position: absolute;
+  left: 720px;
+  top: 225px;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  cursor: pointer;
 }
-.game1 .question-card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: 0 auto;
+.game1 .nav-group .nav-wrapper {
+  background-color: #d6d9db;
+  width: 150px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  transition: 0.5s linear;
+}
+.game1 .nav-group .nav-wrapper:hover {
+  background-color: #bbc0c3;
+}
+.game1 .screen2 {
+  opacity: 0;
+  -webkit-animation-name: showScreen;
+          animation-name: showScreen;
+  -webkit-animation-delay: 750ms;
+          animation-delay: 750ms;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  width: 900px;
+  padding-top: 10px;
+}
+.game1 .screen2 .top .push-animation {
+  position: relative;
+  -webkit-animation-name: moveGroup;
+          animation-name: moveGroup;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 750ms;
+          animation-delay: 750ms;
+  left: -450px;
+}
+.game1 .screen2 .top .push-animation .stickman {
+  top: -10px;
+  left: 60px !important;
+}
+.game1 .screen2 .top .push-animation .stickman .leg {
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-iteration-count: initial !important;
+          animation-iteration-count: initial !important;
+}
+.game1 .screen2 .top .push-animation .cart {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  transition: 0.5s linear;
-  /* Firefox */
+  left: 125px;
+  transition-delay: 0s !important;
+  top: 35px !important;
 }
-.game1 .question-card input::-webkit-outer-spin-button,
-.game1 .question-card input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.game1 .screen2 .top img {
+  position: relative;
+  left: 250px;
+  height: 120px;
 }
-.game1 .question-card input[type=number] {
-  -moz-appearance: textfield;
+@-webkit-keyframes moveGroup {
+  from {
+    left: -450px;
+  }
+  to {
+    left: 0px;
+  }
 }
-.game1 .question-card .question-box {
-  width: 700px;
+@keyframes moveGroup {
+  from {
+    left: -450px;
+  }
+  to {
+    left: 0px;
+  }
+}
+.game1 .screen2 .item-wrapper {
+  margin-top: 25px;
   display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 0 20px;
-  grid-template-areas: ". ." ". description";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas: ". . . ." ". . . ." ". . image10 .";
+  row-gap: 50px;
 }
-.game1 .question-card .question-box .question {
-  font-size: 20px;
+.game1 .screen2 .item-wrapper .item:nth-child(9) {
+  grid-area: image10;
+}
+.game1 .screen2 .item-wrapper .item {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  flex-direction: column;
 }
-.game1 .question-card .question-box input {
-  width: 300px;
-  background-color: #5ac8f5;
-  border: 0px solid;
-  padding: 10px 7.5px;
-  border-radius: 10px;
-  font-size: 18px;
-}
-.game1 .question-card .question-box input:focus {
-  border: 0px;
-  outline: 0px;
-}
-.game1 .question-card .question-box .description {
+.game1 .screen2 .item-wrapper .item .text {
+  background-color: #d6d9db;
+  padding: 0 15px;
   font-size: 14px;
-  opacity: 0.6;
-  margin-top: 5px;
-  grid-area: description;
-}
-.game1 .personal-question {
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  margin: auto;
-  transition: 0.5s linear;
-}
-.game1 .button-show {
-  bottom: initial !important;
-}
-.game1 .radio-button-card .label {
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;
-  font-size: 20px;
-}
-.game1 .radio-button-card .radio-button-question {
   display: flex;
   align-items: center;
-  width: 400px;
-  justify-content: space-between;
+  justify-content: center;
+  height: 40px;
 }
-.game1 .radio-button-card .radio-button-question .question {
-  font-size: 18px;
-}
-.game1 .radio-button-card .radio-button-question .buttons {
-  display: flex;
-  gap: 25px;
-}
-.game1 .radio-button-card .radio-button-question input {
-  width: 25px;
-}
-.game1 .radio-button-card .radio-button-question input:focus {
-  outline: 0px;
-}
-.game1 .radio-button-card .radio-button-question input[type=radio]:after {
-  width: 20px;
-  height: 20px;
-  border-radius: 15px;
-  top: -3px;
-  left: -2px;
-  position: relative;
-  background-color: white;
-  content: "";
-  display: inline-block;
-  visibility: visible;
-  border: 2px solid #bbc0c3;
-  cursor: pointer;
-}
-.game1 .radio-button-card .radio-button-question input[type=radio]:checked:after {
-  width: 20px;
-  height: 20px;
-  border-radius: 15px;
-  top: -3px;
-  left: -2px;
-  position: relative;
-  background-color: #a0c814;
-  content: "";
-  display: inline-block;
-  visibility: visible;
-  border: 2px solid #bbc0c3;
-  cursor: pointer;
-}
-.game1 .radio-wrapper {
-  position: relative;
-  transition: 0.5s linear;
-}
-.game1 .persons {
-  display: flex;
-  gap: 25px;
-  position: relative;
-  transition: 0.5s linear;
-}
-.game1 .persons .person-wrapper {
-  position: relative;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  transition: 0.5s linear;
-  cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  border-radius: 10px;
-}
-.game1 .persons .person-wrapper:hover {
-  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
-}
-.game1 .persons .person-wrapper .person-card {
-  padding: 20px;
-  width: 275px;
-  pointer-events: none;
-}
-.game1 .persons .person-wrapper .person-card .top {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-.game1 .persons .person-wrapper .person-card .top .image {
+.game1 .screen2 .item-wrapper .item img {
   width: 75px;
-  height: 90px;
 }
-.game1 .persons .person-wrapper .person-card .top .image img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+
+#indicator .Indicator {
+  z-index: 100000000 !important;
 }
-.game1 .persons .person-wrapper .person-card .top .info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
+@-webkit-keyframes showScreen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-.game1 .persons .person-wrapper .person-card .additional {
-  display: flex;
-  gap: 15px;
-  flex-direction: column;
+
+@keyframes showScreen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-.game1 .check-wrapper {
-  display: flex;
-  gap: 25px;
-  margin-top: -25px;
-  margin-left: 125px;
-  position: relative;
-  transition: 1s linear;
-  top: 0;
-}
-.game1 .check-wrapper .count {
-  font-size: 18px;
-  background-color: #a0c814;
-  color: #fff;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  margin-top: 7.5px;
-}
-.game1 .check-wrapper .check-card-wrapper {
-  width: 275px;
-  display: flex;
-  gap: 25px;
-  justify-content: center;
-}
-.game1 .check-wrapper .check-card-wrapper .check-card {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-.game1 .check-wrapper .check-card-wrapper .check-card .card {
-  padding: 25px 0;
-  gap: 0px;
-}
-.game1 .check-wrapper .check-card-wrapper .check-card .name {
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 20px;
-}
-.game1 .check-wrapper .check-card-wrapper .check-card .label {
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;
-  font-size: 17px;
-  padding: 0 25px;
-}
-.game1 .check-wrapper .check-card-wrapper .check-card .single-check {
-  display: flex;
-  justify-content: space-between;
-  padding: 7.5px 0;
-  padding-right: 32px;
-  padding-left: 27px;
-}
-.game1 .check-wrapper .check-card-wrapper .check-card .single-check .circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 15px;
-  background-color: white;
-  display: inline-block;
-  border: 2px solid #bbc0c3;
-}
-.game1 .check-wrapper .check-card-wrapper .check-card .single-check .circle-checked {
-  background-color: #a0c814;
-}
-.game1 .check-wrapper .single-wrapper {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+.help-overlay {
+  z-index: 100000000 !important;
 }

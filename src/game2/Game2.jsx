@@ -292,7 +292,6 @@ const Game2 = ({ nextLesson }) => {
       setTimeout(() => {
         setHelpFingerPosition("init");
         setScissorsPos([mouseX - initX, mouseY - initY]);
-        console.log(mouseX, "init");
       }, 550);
     }, 1250);
   }, [helpOverlay]);
@@ -310,10 +309,12 @@ const Game2 = ({ nextLesson }) => {
           <div
             ref={groupRefs[groupIndex]}
             className={`item-group ${groupIndex === level && "show-group"}`}
+            key={groupIndex}
           >
             {group.map((item, itemIndex) => (
               <Item
                 item={item}
+                key={itemIndex}
                 activeScissors={setScissorsActive}
                 finished={finished[groupIndex][itemIndex]}
                 setFinished={() => {
@@ -335,12 +336,12 @@ const Game2 = ({ nextLesson }) => {
               left: level > 2 ? 0 : "-100vw",
             }}
           >
-            {content.map((group) => (
-              <div className="line">
-                {group.map((item) => (
-                  <p>
+            {content.map((group, groupIndex) => (
+              <div className="line" key={groupIndex}>
+                {group.map((item, itemIndex) => (
+                  <div key={itemIndex}>
                     <WordGroup item={item} />
-                  </p>
+                  </div>
                 ))}
               </div>
             ))}

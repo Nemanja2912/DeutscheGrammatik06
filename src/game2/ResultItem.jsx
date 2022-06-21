@@ -30,6 +30,7 @@ const ResultItem = ({ item, show, movable }) => {
           if (movable) {
             return (
               <span
+                key={index}
                 className={`${index === 0 && "movable"}`}
                 style={{
                   left: index === 0 ? pos[0] : 0,
@@ -41,7 +42,7 @@ const ResultItem = ({ item, show, movable }) => {
               </span>
             );
           } else {
-            return <>{text}</>;
+            return <React.Fragment key={index}>{text}</React.Fragment>;
           }
         })}
       </div>

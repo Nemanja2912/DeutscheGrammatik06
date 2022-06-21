@@ -4,12 +4,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid red;
 
   .image {
     margin-bottom: 25px;
+    width: max-content;
+    height: 200px;
+
     img {
-      width: 300px;
+      position: absolute;
+      width: 200px;
+      transition: left 0.5s linear;
+    }
+
+    .move-animation {
+      animation: move 700ms linear forwards;
     }
   }
 
@@ -22,10 +30,15 @@
     top: 0;
   }
 
+  .drop-zones.move-animation {
+    animation: moveDrop 700ms linear forwards;
+  }
+
   .drop-zones {
     display: flex;
     margin-bottom: 25px;
     gap: 25px;
+    position: relative;
 
     .drop {
       display: flex;
@@ -56,6 +69,8 @@
   .interactive-word {
     display: flex;
     gap: 25px;
+    position: relative;
+    z-index: 1000;
 
     .word-box {
       background-color: #5ac8f5;
@@ -80,6 +95,20 @@
       &:hover {
         background-color: #d6d9db;
       }
+    }
+  }
+
+  .interactive-word.move-animation {
+    animation: moveInteractive 700ms linear forwards;
+  }
+
+  @keyframes moveInteractive {
+    from {
+      top: 100vh;
+    }
+
+    to {
+      top: 0;
     }
   }
 
@@ -122,5 +151,68 @@
     .box-swipe {
       order: 2;
     }
+  }
+}
+
+.tape {
+  width: 1000px;
+  margin-top: 50px;
+
+  .boxes {
+    pointer-events: none;
+    display: flex;
+
+    .box {
+      position: absolute;
+      left: 425px;
+      z-index: 999;
+      background-color: #d6d9db;
+      width: 150px;
+      font-size: 20px;
+      height: 75px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 150%;
+      transition: top 0.5s linear, left 0.5s linear;
+
+      span {
+        transition: 0.5s linear;
+      }
+
+      span.blury {
+        color: #1d65a1;
+        text-shadow: #1d65a1 0px 0px 2px;
+      }
+    }
+  }
+}
+
+.game5line {
+  height: 100px;
+  background-color: #ededed;
+  width: 1000px;
+}
+
+@keyframes move {
+  from {
+    left: -500px;
+  }
+
+  to {
+    left: 400px;
+  }
+}
+
+@keyframes moveDrop {
+  from {
+    left: -1000px;
+  }
+
+  to {
+    left: 0px;
   }
 }

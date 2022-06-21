@@ -30,7 +30,12 @@ const Item = ({ item, activeScissors, finished, setFinished }) => {
 
       <div className="item-results">
         {item.results.map((result, index) => (
-          <ResultItem item={result} movable={index === 1} show={show} />
+          <ResultItem
+            key={index}
+            item={result}
+            movable={index === 1}
+            show={show}
+          />
         ))}
       </div>
     </div>

@@ -22,9 +22,7 @@ const CombineItem = ({ content, completed }) => {
   return (
     <div className="combine-item">
       <div className="combine-words">
-        <div className="word" style={{ opacity: level >= 0 ? 1 : 0 }}>
-          {content.box1}
-        </div>
+        <div className="word word1">{content.box1}</div>
         <div className="word" style={{ opacity: level >= 1 ? 1 : 0 }}>
           <span style={{ color: completed ? "#eb6501" : "#000" }}>
             {content.box2.split(" ")[0]}

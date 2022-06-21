@@ -20,6 +20,23 @@
           border-radius: 7.5px;
           transition: 0.75s linear;
         }
+
+        .word1 {
+          animation-duration: 0.75s;
+          animation-timing-function: linear;
+          animation-fill-mode: forwards;
+          animation-name: show-word;
+        }
+
+        @keyframes show-word {
+          from {
+            opacity: 0;
+          }
+
+          to {
+            opacity: 1;
+          }
+        }
       }
 
       .curly {

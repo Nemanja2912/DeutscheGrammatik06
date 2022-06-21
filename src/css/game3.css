@@ -19,6 +19,32 @@
   border-radius: 7.5px;
   transition: 0.75s linear;
 }
+.game3 .combine-wrapper .combine-item .combine-words .word1 {
+  -webkit-animation-duration: 0.75s;
+          animation-duration: 0.75s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-name: show-word;
+          animation-name: show-word;
+}
+@-webkit-keyframes show-word {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes show-word {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .game3 .combine-wrapper .combine-item .curly {
   width: -webkit-max-content;
   width: -moz-max-content;

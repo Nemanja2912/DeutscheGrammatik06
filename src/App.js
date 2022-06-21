@@ -6,6 +6,7 @@ import Game2 from "./game2/Game2";
 import Game3 from "./game3/Game3";
 import Game4 from "./game4/Game4";
 import Game5 from "./game5/Game5";
+import Screen2 from "./game1/Screen2";
 
 function App() {
   const [navMenuItem, setNavMenuItem] = useState(0);
