@@ -50,7 +50,7 @@ const content = [
       results: [
         {
           image: Image1b1,
-          desc: ["der Kaffe"],
+          desc: ["der Kaffee"],
         },
         {
           image: Image1a2,

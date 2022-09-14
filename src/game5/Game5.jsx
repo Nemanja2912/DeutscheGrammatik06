@@ -15,7 +15,13 @@ import Image10 from "../assets/img/a5/d10.jpg";
 import Image11 from "../assets/img/a5/d11.jpg";
 
 const images = [
-  [Image0, Image1, Image2, Image3, Image4, Image5],
+  [
+    Image0,
+    Image1,
+    Image2,
+    Image3,
+    //  Image4, Image5
+  ],
   [Image6, Image7, Image8, Image9, Image10, Image11],
 ];
 
@@ -25,8 +31,8 @@ const answer = [
     [0, 1],
     [1, 2],
     [0, 0],
-    [1, 1],
-    [0, 1],
+    // [1, 1],
+    // [0, 1],
   ],
   [
     [0, 0],
@@ -44,8 +50,8 @@ const interactiveWords = [
     ["der Plan", "die Reise", "das Auto"],
     ["der Verkäufer", "die Firma", "das Geschäft"],
     ["der Bus", "das Ticket", "der Tourist"],
-    ["der Mann", "die Straße", "das Zentrum"],
-    ["die Polizei", "die Nacht", "das Café"],
+    // ["der Mann", "die Straße", "das Zentrum"],
+    // ["die Polizei", "die Nacht", "das Café"],
   ],
   [
     ["das Tennis", "die Hand", "der Schnee"],
@@ -63,8 +69,8 @@ const dropWords = [
     ["das Büro", "die Möbel"],
     ["die Reise", "die Möbel"],
     ["die Reise", "die Geschäft"],
-    ["der Bus", "das Geschäft"],
-    ["der Bus", "die Straße"],
+    // ["der Bus", "das Geschäft"],
+    // ["der Bus", "die Straße"],
   ],
   [
     ["der Ball", "der Ball"],
@@ -82,8 +88,8 @@ const tapeWords = [
     ["das", ["Reise", "büro"]],
     ["das", ["Möbel", "geschäft"]],
     ["die", ["Bus", "reise"]],
-    ["die", ["Geschäft", "straße"]],
-    ["der", ["Nacht", "bus"]],
+    // ["die", ["Geschäft", "straße"]],
+    // ["der", ["Nacht", "bus"]],
   ],
   [
     ["der", ["Tennis", "ball"]],

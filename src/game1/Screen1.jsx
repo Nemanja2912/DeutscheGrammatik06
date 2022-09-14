@@ -3,14 +3,14 @@ import Buttons from "./Buttons";
 import Cart from "./Cart";
 
 const btnGroup = [
-  ["Stehample 35,-", "Sofa 149,-", "Couchtisch 99,-", "Sessel 109,-"],
+  ["Stehlampe 35,-", "Sofa 149,-", "Couchtisch 99,-", "Sessel 109,-"],
   [
     "Geschirrschrank 209,-",
     "Schüssel 2,49",
     "Spülmaschine 419,-",
     "Esstisch 149,-",
     "Stuhl 39,-",
-    "Kaffeemaschine 49,-",
+    "Kaffeemaschine 79,-",
   ],
   ["Kleiderschrank 169,-", "Wandlampe 34,-", "Teppich 99,-", "Bett 349,-"],
   ["Lampe 29,-", "Bücherschrank 319,-", "Schreibtisch 209,-", "Sessel 99,-"],

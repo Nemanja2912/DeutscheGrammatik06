@@ -29,7 +29,7 @@ const Screen1 = ({ movePos }) => {
           style={{ textTransform: "uppercase" }}
         >
           Was ist ein Kompositum? Dafür gibt es eine Regel. <br />
-          Du kannst die Regel in dieser Lektion lernen oder wiederholen..
+          Du kannst die Regel in dieser Lektion lernen oder wiederholen.
         </p>
       )}
     </>

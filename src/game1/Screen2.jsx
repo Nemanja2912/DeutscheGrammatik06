@@ -49,7 +49,7 @@ const obj = [
     image: Image8,
   },
   {
-    text: "die Schreibtisch",
+    text: "der Schreibtisch",
     image: Image9,
   },
   {

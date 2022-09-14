@@ -78,7 +78,7 @@ const InteractiveBox = ({
 
       setTimeout(() => {
         setDetailsShow(false);
-      }, 2000);
+      }, 4000);
     }, 500);
 
     detailRef.current.style.left =

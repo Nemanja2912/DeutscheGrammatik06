@@ -129,7 +129,8 @@ const Screen = ({
         setStep(6);
 
         setTimeout(() => {
-          if (level < 5) {
+          // From 5 to 3
+          if (level < 3) {
             setStep(0);
             setLevel((prev) => prev + 1);
           } else {
