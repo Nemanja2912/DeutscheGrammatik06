@@ -24,6 +24,10 @@ $GRAY_COLOR: #788287;
   font-family: Goethe;
   box-sizing: border-box;
   transition-timing-function: linear;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 body {

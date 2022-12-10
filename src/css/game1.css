@@ -2,354 +2,113 @@
   margin-top: 75px;
   height: 100vh;
   width: 1000px;
-}
-@-webkit-keyframes opacity {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes opacity {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.game1 .buttons .btn {
-  position: absolute;
-  z-index: 10000000;
-  background-color: #5ac8f5;
-  padding: 12px 15px;
-  cursor: pointer;
-  transition: 0.13s linear;
-  opacity: 1;
-}
-.game1 .buttons .red-bg {
-  background-color: #eb6400;
-}
-.game1 .buttons .green-bg {
-  background-color: #a0c814;
-}
-.game1 .buttons .hide {
-  opacity: 0 !important;
-}
-.game1 .buttons1 .btn1 {
-  top: 260px;
-  left: 400px;
-}
-.game1 .buttons1 .btn2 {
-  top: 475px;
-  left: 50px;
-}
-.game1 .buttons1 .btn3 {
-  top: 475px;
-  left: 275px;
-}
-.game1 .buttons1 .btn4 {
-  top: 500px;
-  left: 525px;
-}
-.game1 .buttons2 .btn1 {
-  top: 250px;
-  left: 480px;
-}
-.game1 .buttons2 .btn2 {
-  top: 380px;
-  left: 180px;
-}
-.game1 .buttons2 .btn3 {
-  top: 400px;
-  left: 420px;
-}
-.game1 .buttons2 .btn4 {
-  top: 450px;
-  left: 60px;
-}
-.game1 .buttons2 .btn5 {
-  top: 475px;
-  left: 250px;
-}
-.game1 .buttons2 .btn6 {
-  top: 500px;
-  left: 500px;
-}
-.game1 .buttons3 .btn1 {
-  top: 225px;
-  left: 40px;
-}
-.game1 .buttons3 .btn2 {
-  top: 300px;
-  left: 565px;
-}
-.game1 .buttons3 .btn3 {
-  top: 510px;
-  left: 60px;
-}
-.game1 .buttons3 .btn4 {
-  top: 400px;
-  left: 400px;
-}
-.game1 .buttons4 .btn1 {
-  top: 250px;
-  left: 550px;
-}
-.game1 .buttons4 .btn2 {
-  top: 350px;
-  left: 250px;
-}
-.game1 .buttons4 .btn3 {
-  top: 480px;
-  left: 60px;
-}
-.game1 .buttons4 .btn4 {
-  top: 450px;
-  left: 490px;
-}
-.game1 .cart {
-  width: 100px;
-  position: absolute;
-  top: 275px;
-  left: 700px;
-  transform: scaleX(-1);
-  transition: 0.625s linear;
-  transition-delay: 1875ms;
-}
-.game1 .cart-move {
-  left: 865px !important;
-}
-.game1 .stickman {
-  width: 65px;
-  position: absolute;
-  top: 560px;
-  z-index: 10000000;
-  -webkit-animation-duration: 2500ms;
-          animation-duration: 2500ms;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-name: stickman-walk;
-          animation-name: stickman-walk;
-}
-.game1 .stickman .leg {
-  -webkit-animation-duration: 400ms;
-          animation-duration: 400ms;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
-  -webkit-animation-direction: alternate;
-          animation-direction: alternate;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  transform-origin: left;
-}
-.game1 .stickman .leg-right {
-  -webkit-animation-name: walk2;
-          animation-name: walk2;
-}
-.game1 .stickman .leg-left {
-  -webkit-animation-name: walk1;
-          animation-name: walk1;
-}
-@-webkit-keyframes walk1 {
-  from {
-    transform: rotate(0deg) translate(0, 0);
-  }
-  to {
-    transform: rotate(-25deg) translate(-10px, 10px);
-  }
-}
-@keyframes walk1 {
-  from {
-    transform: rotate(0deg) translate(0, 0);
-  }
-  to {
-    transform: rotate(-25deg) translate(-10px, 10px);
-  }
-}
-@-webkit-keyframes walk2 {
-  from {
-    transform: rotate(0deg) translate(0, 0);
-  }
-  to {
-    transform: rotate(25deg) translate(0px, -20px);
-  }
-}
-@keyframes walk2 {
-  from {
-    transform: rotate(0deg) translate(0, 0);
-  }
-  to {
-    transform: rotate(25deg) translate(0px, -20px);
-  }
-}
-@-webkit-keyframes stickman-walk {
-  0% {
-    left: -50px;
-  }
-  75% {
-    left: 635px;
-  }
-  100% {
-    left: 800px;
-  }
-}
-@keyframes stickman-walk {
-  0% {
-    left: -50px;
-  }
-  75% {
-    left: 635px;
-  }
-  100% {
-    left: 800px;
-  }
-}
-.game1 .nav-group {
-  position: absolute;
-  left: 720px;
-  top: 225px;
+  padding-left: 50px;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  cursor: pointer;
+  gap: 60px;
 }
-.game1 .nav-group .nav-wrapper {
-  background-color: #d6d9db;
-  width: 150px;
-  height: 40px;
+.game1 .shadow {
+  box-shadow: rgba(255, 255, 255, 0.56) 0px 22px 10px 25px;
+  position: absolute;
+  top: -35px;
+  left: 0;
+  right: 0;
+  height: 100px;
+  width: 100%;
+  z-index: 10000;
+  transition: 0.25s;
+}
+.game1 .message {
   display: flex;
-  align-items: center;
-  padding-left: 15px;
-  transition: 0.5s linear;
-}
-.game1 .nav-group .nav-wrapper:hover {
-  background-color: #bbc0c3;
-}
-.game1 .screen2 {
-  opacity: 0;
-  -webkit-animation-name: showScreen;
-          animation-name: showScreen;
-  -webkit-animation-delay: 750ms;
-          animation-delay: 750ms;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-duration: 250ms;
-          animation-duration: 250ms;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
-  width: 900px;
-  padding-top: 10px;
-}
-.game1 .screen2 .top .push-animation {
-  position: relative;
-  -webkit-animation-name: moveGroup;
-          animation-name: moveGroup;
-  -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
-  -webkit-animation-direction: alternate;
-          animation-direction: alternate;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-delay: 750ms;
-          animation-delay: 750ms;
-  left: -450px;
-}
-.game1 .screen2 .top .push-animation .stickman {
-  top: -10px;
-  left: 60px !important;
-}
-.game1 .screen2 .top .push-animation .stickman .leg {
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-iteration-count: initial !important;
-          animation-iteration-count: initial !important;
-}
-.game1 .screen2 .top .push-animation .cart {
+  gap: 5px;
+  width: 575px;
+  font-size: 20px;
+  border-radius: 20px 20px 20px 0;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  left: 125px;
-  transition-delay: 0s !important;
-  top: 35px !important;
 }
-.game1 .screen2 .top img {
+.game1 .message .name {
+  border-radius: 20px 0px 0px 0;
+  padding: 15px;
+  height: 100%;
+  background-color: #5ac8f5;
+  color: white;
+  font-weight: 500;
+  margin-right: 20px;
+}
+.game1 .message .body {
   position: relative;
-  left: 250px;
-  height: 120px;
+  z-index: 1000;
 }
-@-webkit-keyframes moveGroup {
-  from {
-    left: -450px;
-  }
-  to {
-    left: 0px;
-  }
+.game1 .message .body .fake > div,
+.game1 .message .body .real {
+  display: flex;
+  padding-top: 15px;
 }
-@keyframes moveGroup {
-  from {
-    left: -450px;
-  }
-  to {
-    left: 0px;
-  }
+.game1 .message .body .fake {
+  position: absolute;
+  z-index: 1000;
+  pointer-events: none;
 }
-.game1 .screen2 .item-wrapper {
-  margin-top: 25px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-areas: ". . . ." ". . . ." ". . image10 .";
-  row-gap: 50px;
+.game1 .message .body .move-word {
+  transition: 0.25s;
+  padding: 0 2.5px;
+  border-radius: 5px;
 }
-.game1 .screen2 .item-wrapper .item:nth-child(9) {
-  grid-area: image10;
+.game1 .message .body .real > div:hover {
+  background-color: #5ac8f5;
 }
-.game1 .screen2 .item-wrapper .item {
+.game1 .box {
+  background-color: #5ac8f5;
+  width: 275px;
+  border-radius: 15px;
+  padding: 10px;
+  transition: 0.25s;
+  z-index: -1;
+  position: relative;
+}
+.game1 .box .line {
+  height: 30px;
+  width: 100%;
+  font-size: 20px;
+}
+.game1 .box .line p {
+  z-index: -1;
+  opacity: 0;
+  transition: 0.5s linear;
+}
+.game1 .map {
+  margin-left: 20px;
   display: flex;
   align-items: center;
-  flex-direction: column;
 }
-.game1 .screen2 .item-wrapper .item .text {
-  background-color: #d6d9db;
-  padding: 0 15px;
-  font-size: 14px;
+.game1 .map img {
+  height: 20px;
+  cursor: pointer;
+}
+.game1 .map img:hover {
+  background-color: transparent !important;
+}
+.game1 .map:hover {
+  background-color: transparent !important;
+}
+.game1 .options {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
+  gap: 10px;
+  position: absolute;
+  margin-left: 20px;
+  transform: translateY(15px);
 }
-.game1 .screen2 .item-wrapper .item img {
-  width: 75px;
+.game1 .button {
+  background-color: #5ac8f5;
+  color: white;
+  padding: 12px 15px;
+  border-radius: 7.5px;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
-
-#indicator .Indicator {
-  z-index: 100000000 !important;
-}
-
-@-webkit-keyframes showScreen {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes showScreen {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.help-overlay {
-  z-index: 100000000 !important;
+.game1 .button:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }

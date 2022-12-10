@@ -2,346 +2,132 @@
   margin-top: 75px;
   height: 100vh;
   width: 1000px;
+  padding-left: 50px;
+  display: flex;
+  gap: 60px;
 
-  @keyframes opacity {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  .buttons {
-    .btn {
-      position: absolute;
-      z-index: 10000000;
-      background-color: #5ac8f5;
-      padding: 12px 15px;
-      cursor: pointer;
-      transition: 0.13s linear;
-      opacity: 1;
-    }
-
-    .red-bg {
-      background-color: #eb6400;
-    }
-
-    .green-bg {
-      background-color: #a0c814;
-    }
-
-    .hide {
-      opacity: 0 !important;
-    }
-  }
-
-  .buttons1 {
-    .btn1 {
-      top: 260px;
-      left: 400px;
-    }
-
-    .btn2 {
-      top: 475px;
-      left: 50px;
-    }
-
-    .btn3 {
-      top: 475px;
-      left: 275px;
-    }
-
-    .btn4 {
-      top: 500px;
-      left: 525px;
-    }
-  }
-
-  .buttons2 {
-    .btn1 {
-      top: 250px;
-      left: 480px;
-    }
-
-    .btn2 {
-      top: 380px;
-      left: 180px;
-    }
-
-    .btn3 {
-      top: 400px;
-      left: 420px;
-    }
-
-    .btn4 {
-      top: 450px;
-      left: 60px;
-    }
-
-    .btn5 {
-      top: 475px;
-      left: 250px;
-    }
-
-    .btn6 {
-      top: 500px;
-      left: 500px;
-    }
-  }
-
-  .buttons3 {
-    .btn1 {
-      top: 225px;
-      left: 40px;
-    }
-
-    .btn2 {
-      top: 300px;
-      left: 565px;
-    }
-
-    .btn3 {
-      top: 510px;
-      left: 60px;
-    }
-
-    .btn4 {
-      top: 400px;
-      left: 400px;
-    }
-  }
-
-  .buttons4 {
-    .btn1 {
-      top: 250px;
-      left: 550px;
-    }
-
-    .btn2 {
-      top: 350px;
-      left: 250px;
-    }
-
-    .btn3 {
-      top: 480px;
-      left: 60px;
-    }
-
-    .btn4 {
-      top: 450px;
-      left: 490px;
-    }
-  }
-
-  .cart {
-    width: 100px;
+  .shadow {
+    box-shadow: rgba(255, 255, 255, 0.56) 0px 22px 10px 25px;
     position: absolute;
-    top: 275px;
-    left: 700px;
-    transform: scaleX(-1);
-    transition: 0.625s linear;
-    transition-delay: 1875ms;
+    top: -35px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    width: 100%;
+    z-index: 10000;
+    transition: 0.25s;
   }
 
-  .cart-move {
-    left: 865px !important;
-  }
-
-  .stickman {
-    width: 65px;
-    position: absolute;
-    top: 560px;
-    z-index: 10000000;
-    animation-duration: 2500ms;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-    animation-name: stickman-walk;
-
-    .leg {
-      animation-duration: 400ms;
-      animation-timing-function: linear;
-      animation-direction: alternate;
-      animation-fill-mode: forwards;
-      animation-iteration-count: infinite;
-      transform-origin: left;
-    }
-
-    .leg-right {
-      animation-name: walk2;
-    }
-
-    .leg-left {
-      animation-name: walk1;
-    }
-
-    @keyframes walk1 {
-      from {
-        transform: rotate(0deg) translate(0, 0);
-      }
-
-      to {
-        transform: rotate(-25deg) translate(-10px, 10px);
-      }
-    }
-
-    @keyframes walk2 {
-      from {
-        transform: rotate(0deg) translate(0, 0);
-      }
-
-      to {
-        transform: rotate(25deg) translate(0px, -20px);
-      }
-    }
-  }
-
-  @keyframes stickman-walk {
-    0% {
-      left: -50px;
-    }
-
-    75% {
-      left: 635px;
-    }
-
-    100% {
-      left: 800px;
-    }
-  }
-
-  .nav-group {
-    position: absolute;
-    left: 720px;
-    top: 225px;
+  .message {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    cursor: pointer;
+    gap: 5px;
+    width: 575px;
+    font-size: 20px;
+    border-radius: 20px 20px 20px 0;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    height: max-content;
 
-    .nav-wrapper {
-      background-color: #d6d9db;
-      width: 150px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      padding-left: 15px;
-      transition: 0.5s linear;
+    .name {
+      border-radius: 20px 0px 0px 0;
+      padding: 15px;
+      height: 100%;
+      background-color: #5ac8f5;
+      color: white;
+      font-weight: 500;
+      margin-right: 20px;
+    }
+
+    .body {
+      position: relative;
+      z-index: 1000;
+
+      .fake > div,
+      .real {
+        display: flex;
+        padding-top: 15px;
+      }
+
+      .fake {
+        position: absolute;
+        z-index: 1000;
+        pointer-events: none;
+      }
+
+      .move-word {
+        transition: 0.25s;
+        padding: 0 2.5px;
+        border-radius: 5px;
+      }
+
+      .real {
+        > div:hover {
+          background-color: #5ac8f5;
+        }
+      }
+    }
+  }
+
+  .box {
+    background-color: #5ac8f5;
+    width: 275px;
+    border-radius: 15px;
+    padding: 10px;
+    transition: 0.25s;
+    z-index: -1;
+    position: relative;
+
+    .line {
+      height: 30px;
+      width: 100%;
+      font-size: 20px;
+
+      p {
+        z-index: -1;
+        opacity: 0;
+        transition: 0.5s linear;
+      }
+    }
+  }
+
+  .map {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 20px;
+      cursor: pointer;
 
       &:hover {
-        background-color: darken($color: #d6d9db, $amount: 10);
-      }
-    }
-  }
-
-  .screen2 {
-    opacity: 0;
-    animation-name: showScreen;
-    animation-delay: 750ms;
-    animation-fill-mode: forwards;
-    animation-duration: 250ms;
-    animation-timing-function: linear;
-
-    width: 900px;
-    padding-top: 10px;
-
-    .top {
-      .push-animation {
-        position: relative;
-        animation-name: moveGroup;
-        animation-duration: 0.5s;
-        animation-timing-function: linear;
-        animation-direction: alternate;
-        animation-fill-mode: forwards;
-        animation-delay: 750ms;
-        left: -450px;
-
-        .stickman {
-          top: -10px;
-          left: 60px !important;
-
-          .leg {
-            animation-duration: 1s;
-            animation-iteration-count: initial !important;
-          }
-        }
-
-        .cart {
-          height: max-content;
-          left: 125px;
-          transition-delay: 0s !important;
-          top: 35px !important;
-        }
-      }
-
-      img {
-        position: relative;
-        left: 250px;
-        height: 120px;
+        background-color: transparent !important;
       }
     }
 
-    @keyframes moveGroup {
-      from {
-        left: -450px;
-      }
-
-      to {
-        left: 0px;
-      }
-    }
-
-    .item-wrapper {
-      margin-top: 25px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-template-areas: ". . . ." ". . . ." ". . image10 .";
-      row-gap: 50px;
-
-      .item:nth-child(9) {
-        grid-area: image10;
-      }
-
-      .item {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-
-        .text {
-          background-color: #d6d9db;
-          padding: 0 15px;
-          font-size: 14px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 40px;
-        }
-
-        img {
-          width: 75px;
-        }
-      }
+    &:hover {
+      background-color: transparent !important;
     }
   }
-}
 
-#indicator {
-  .Indicator {
-    z-index: 100000000 !important;
-  }
-}
-
-@keyframes showScreen {
-  from {
-    opacity: 0;
+  .options {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    margin-left: 20px;
+    transform: translateY(15px);
   }
 
-  to {
-    opacity: 1;
+  .button {
+    background-color: #5ac8f5;
+    color: white;
+    padding: 12px 15px;
+    border-radius: 7.5px;
+    cursor: pointer;
+    transition: 0.25s;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   }
-}
 
-.help-overlay {
-  z-index: 100000000 !important;
+  .button:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }
 }
