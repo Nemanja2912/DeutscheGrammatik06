@@ -19,7 +19,7 @@ const Screen1 = ({ movePos }) => {
         }`}
       >
         <p className={`title`}>Interaktive Grammatik</p>
-        <p className="subtitle">Komposita</p>
+        <p className="subtitle">Konjugation im Präsens</p>
       </div>
       {textNone ? (
         ""
@@ -28,8 +28,8 @@ const Screen1 = ({ movePos }) => {
           className={`text ${movePos !== 0 ? "hidden" : ""}`}
           style={{ textTransform: "uppercase" }}
         >
-          Was ist ein Kompositum? Dafür gibt es eine Regel. <br />
-          Du kannst die Regel in dieser Lektion lernen oder wiederholen.
+          Wie bildet man das Präsens? Dafür gibt es eine Regel. <br />
+          Diese Regel kannst du in dieser Lektion lernen oder wiederholen.
         </p>
       )}
     </>

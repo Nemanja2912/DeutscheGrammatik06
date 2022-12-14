@@ -81,7 +81,7 @@ function App() {
       )}
       {navMenuItem === 4 && <Game5 />} */}
 
-      <Game1 />
+      <Game3 />
     </div>
   );
 }

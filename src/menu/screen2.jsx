@@ -50,7 +50,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem, navButtonRef }) => {
                       : `translateY(-${100 * item}%)`,
                 }}
               >
-                1. Komposita kaufen
+                1. Verben aus dem Chat
               </div>
 
               <div
@@ -75,7 +75,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem, navButtonRef }) => {
                 }}
                 ref={navButtonRef[1]}
               >
-                2. Komposita schneiden
+                2. Präsens bilden
               </div>
               <div
                 className={`title ${item === 2 ? "active" : ""} ${
@@ -158,14 +158,14 @@ const Screen2 = ({ movePos, changePos, item, changeItem, navButtonRef }) => {
               }}
             >
               {item === 0
-                ? "Was ist ein Kompositum?"
+                ? "Verben finden"
                 : item === 1
-                ? "Der, die, das – welcher Artikel ist richtig?"
+                ? "Wie bildet man das Präsens?"
                 : item === 2
-                ? "Wie heisst die Regel?"
+                ? "Wie heißt die Regel?"
                 : item === 3
                 ? "Was weisst du?"
-                : "Was weißt du?"}
+                : "Was kannst du?"}
             </div>
             <p
               style={{
@@ -174,14 +174,14 @@ const Screen2 = ({ movePos, changePos, item, changeItem, navButtonRef }) => {
               }}
             >
               {item === 0
-                ? "Hier arbeitest du mit einem Katalog und kaufst Möbel."
+                ? "Du arbeitest mit einem Chat. In diesem Chat gibt es viele Verben."
                 : item === 1
                 ? "Du teilst die Wörter mit einer Schere und siehst Animationen."
                 : item === 2
-                ? "Du hast viel mit Komposita gearbeitet und kannst jetzt selbst eine Regel formulieren."
+                ? "Wie bildet man das Präsens?"
                 : item === 3
-                ? "Du arbeitest mit einer Internetseite und bildest selbst Komposita."
-                : "Du spielst Domino und bildest Komposita."}
+                ? "In dieser Übung klickst du die passenden Verbformen an."
+                : "In dieser Übung arbeitest du mit vielen Sätzen."}
             </p>
           </>
         )}

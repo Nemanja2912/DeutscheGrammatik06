@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Indicator from "../indicator/indicator";
+import Indicator from "./../../reusable/indicator/indicator";
 
-const Movable = React.forwardRef(
+const MovableEdited = React.forwardRef(
   (
     {
       children,
@@ -75,7 +75,7 @@ const Movable = React.forwardRef(
             setPos([posX, posY]);
             setActiveIndicator("correct");
 
-            onFinished(endEvent);
+            onFinished(endEvent, element);
           } else {
             onFail(element);
             setPos([0, 0]);
@@ -87,10 +87,10 @@ const Movable = React.forwardRef(
           let index = -1;
 
           for (let i = 0; i < multipleRefs.length; i++) {
-            console.log(multipleRefsDisabled, "disable");
             if (multipleRefsDisabled[i] === true) continue;
 
             if (
+              multipleRefs[i].current &&
               endEvent.clientX >
                 multipleRefs[i].current.getBoundingClientRect().left &&
               endEvent.clientX <
@@ -110,12 +110,15 @@ const Movable = React.forwardRef(
           } else {
             const dropX =
               multipleCustomDrop[index]?.current?.getBoundingClientRect()
-                ?.right;
+                ?.right -
+              7.5 -
+              element.children[0].getBoundingClientRect()?.width;
 
             const dropY =
-              multipleCustomDrop[index]?.current?.getBoundingClientRect()?.top;
+              multipleCustomDrop[index]?.current?.getBoundingClientRect()?.top -
+              element.getBoundingClientRect().height;
 
-            checkDrop(multipleRefs, multipleRefs[index].current, [
+            checkDrop(multipleRefs, multipleRefs[index]?.current, [
               dropX,
               dropY,
             ]);
@@ -160,4 +163,4 @@ const Movable = React.forwardRef(
   }
 );
 
-export default Movable;
+export default MovableEdited;
