@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect, createRef } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  createRef,
+  useCallback,
+} from "react";
 import Indicator from "../UI/Indicator";
 
 import Ball from "./../UI/Ball";
@@ -155,12 +161,12 @@ const Group2 = () => {
 
       setTimeout(() => {
         setDisable(false);
-        activeAnimation();
+        // activeAnimation();
       }, 500);
     }, 500);
   }, []);
 
-  const activeAnimation = () => {
+  const activeAnimation = useCallback(() => {
     const speed = 8000;
     time = +new Date();
 
@@ -168,21 +174,51 @@ const Group2 = () => {
 
     setAnimationDuration(speed);
 
+    if (boxList.length === 0) return;
+
     timeout = setTimeout(() => {
-      console.log("bbn");
+      setDisable(true);
 
-      handleCheck(-1, true);
+      setActiveIndicator(["wrong"]);
+
+      setTimeout(() => {
+        setActiveIndicator(false);
+      }, 1250);
+
+      setTimeout(() => {
+        setTimeout(() => {
+          setBoxLevel(2);
+
+          setTimeout(() => {
+            const index =
+              subjectIndex === boxList.length - 1 ? 0 : subjectIndex + 1;
+
+            setSubjectIndex(index);
+
+            setBoxLevel(3);
+
+            setTimeout(() => {
+              setBoxLevel(0);
+              setTimeout(() => {
+                setBoxLevel(1);
+
+                setTimeout(() => {
+                  setDisable(false);
+                }, 500);
+              }, 500);
+            }, 50);
+          }, 500);
+        }, 500);
+      }, 500);
     }, speed);
-  };
+  }, [subjectIndex, boxList.length]);
 
-  const handleCheck = (index, auto = false) => {
+  const handleCheck = (index) => {
     setDisable(true);
-
-    clearTimeout(timeout);
 
     const ballActiveList = [...active];
 
-    if (!auto && balls[index].type.includes(boxList[subjectIndex].type)) {
+    if (balls[index].type.includes(boxList[subjectIndex].type)) {
       ballActiveList[index] = "correct";
 
       setActiveIndicator(["correct"]);
@@ -195,16 +231,16 @@ const Group2 = () => {
       setActiveIndicator(["wrong"]);
       setDisable(false);
 
-      if (!auto) return;
+      return;
     }
+
+    clearTimeout(timeout);
 
     setTimeout(() => {
       setActiveIndicator(false);
     }, 1250);
 
-    if (!auto) {
-      setActive([...ballActiveList]);
-    }
+    setActive([...ballActiveList]);
 
     setTimeout(() => {
       for (let i = 0; i < ballActiveList.length; i++) {
@@ -213,9 +249,7 @@ const Group2 = () => {
         }
       }
 
-      if (!auto) {
-        setActive([...ballActiveList]);
-      }
+      setActive([...ballActiveList]);
 
       setTimeout(() => {
         const subjectList = [];
@@ -240,9 +274,7 @@ const Group2 = () => {
           }
         }
 
-        if (!auto) {
-          setActive([...ballActiveList]);
-        }
+        setActive([...ballActiveList]);
 
         setBoxLevel(2);
 
@@ -250,15 +282,9 @@ const Group2 = () => {
           const index =
             indexInNewList >= subjectList.length - 1 ? 0 : indexInNewList + 1;
 
-          if (auto) {
-            setSubjectIndex((prev) => prev + 1);
-          } else {
-            setSubjectIndex(index);
-          }
+          setSubjectIndex(index);
 
-          if (!auto) {
-            setBoxList([...subjectList]);
-          }
+          setBoxList([...subjectList]);
 
           setBoxLevel(3);
 
@@ -268,12 +294,7 @@ const Group2 = () => {
               setBoxLevel(1);
 
               setTimeout(() => {
-                if (boxList.length > 0) {
-                  console.log("wtf", boxList);
-
-                  activeAnimation();
-                  setDisable(false);
-                }
+                setDisable(false);
               }, 500);
             }, 500);
           }, 50);
@@ -281,6 +302,12 @@ const Group2 = () => {
       }, 500);
     }, 500);
   };
+
+  useEffect(() => {
+    if (boxLevel === 1 && !disable) {
+      activeAnimation();
+    }
+  }, [boxLevel, activeAnimation, disable]);
 
   const handleIteration = () => {
     resetAnimation();

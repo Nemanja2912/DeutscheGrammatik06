@@ -6,7 +6,7 @@ import Group1 from "./group1";
 import Group2 from "./group2";
 
 const Game4 = () => {
-  const [part, setPart] = useState(0);
+  const [part, setPart] = useState(1);
 
   const [helpOverlay, setHelpOverlay] = useState(false);
   const [helpFingerPosition, setHelpFingerPosition] = useState("init");
@@ -18,7 +18,7 @@ const Game4 = () => {
       Klicke die Verben an.
     </>
   );
-  const [infoOverlay, setInfoOverlay] = useState(true);
+  const [infoOverlay, setInfoOverlay] = useState(false);
 
   const handleInfo = () => {
     setPart(1);
