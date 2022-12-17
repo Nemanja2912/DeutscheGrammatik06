@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/DeutscheGrammatik06/static/css/main.b44f6bf6.css",
+    "main.js": "/DeutscheGrammatik06/static/js/main.ab867302.js",
+    "static/media/GoetheGothic.ttf": "/DeutscheGrammatik06/static/media/GoetheGothic.8f1c1efe083825857c78.ttf",
+    "static/media/GoetheGothicBold.ttf": "/DeutscheGrammatik06/static/media/GoetheGothicBold.612e7d204308972bcca6.ttf",
+    "index.html": "/DeutscheGrammatik06/index.html",
+    "static/media/wrong.svg": "/DeutscheGrammatik06/static/media/wrong.e1e9b4abfad909edcfa12b2b7ce548b7.svg",
+    "static/media/file.svg": "/DeutscheGrammatik06/static/media/file.acd35ab175daf08aee91aa9d384cca70.svg",
+    "static/media/arrow_down.svg": "/DeutscheGrammatik06/static/media/arrow_down.280089b6feef82aaf59e40df2afc42d4.svg",
+    "main.b44f6bf6.css.map": "/DeutscheGrammatik06/static/css/main.b44f6bf6.css.map",
+    "main.ab867302.js.map": "/DeutscheGrammatik06/static/js/main.ab867302.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b44f6bf6.css",
+    "static/js/main.ab867302.js"
+  ]
+}
