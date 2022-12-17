@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import "../style/style.css";
 
-const Indicator = ({ active = false, setActiveIndicator }) => {
+const Indicator = ({ active = false, setActiveIndicator = () => {} }) => {
   const [animationStep, setAnimationStep] = useState(0);
 
   useEffect(() => {

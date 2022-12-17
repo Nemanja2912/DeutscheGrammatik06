@@ -1,4 +1,10 @@
-const Ball = ({ children, color = "#a0c813", ballRef }) => {
+const Ball = ({
+  children,
+  color = "#a0c813",
+  ballRef,
+  onClick = () => {},
+  style,
+}) => {
   const ballStyle = {
     margin: "0",
     position: "relative",
@@ -18,7 +24,12 @@ const Ball = ({ children, color = "#a0c813", ballRef }) => {
   };
 
   return (
-    <div className="ball" ref={ballRef} style={ballStyle}>
+    <div
+      className="ball"
+      ref={ballRef}
+      style={{ ...style, ...ballStyle }}
+      onClick={onClick}
+    >
       {children}
     </div>
   );

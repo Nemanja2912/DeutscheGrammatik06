@@ -9,8 +9,11 @@ const MovableEdited = React.forwardRef(
       style,
       targetRef = false,
       transition = 0.25,
+
       customDrop = false,
       noreturn = false,
+      noRight = false,
+      noTop = false,
       multipleRefs = [],
       multipleRefsDisabled = [],
       multipleCustomDrop = [],
@@ -78,7 +81,9 @@ const MovableEdited = React.forwardRef(
             onFinished(endEvent, element);
           } else {
             onFail(element);
+
             setPos([0, 0]);
+
             setActiveIndicator("wrong");
           }
         };
@@ -108,16 +113,29 @@ const MovableEdited = React.forwardRef(
           if (index === -1) {
             checkDrop(false);
           } else {
-            const dropX =
+            let dropX;
+
+            dropX =
               multipleCustomDrop[index]?.current?.getBoundingClientRect()
                 ?.right -
               7.5 -
               element.children[0].getBoundingClientRect()?.width;
 
+            if (noRight) {
+              dropX =
+                multipleCustomDrop[index]?.current?.getBoundingClientRect()
+                  ?.left;
+            }
+
+            let top = element.getBoundingClientRect().height;
+
+            if (noTop) {
+              top = 0;
+            }
+
             const dropY =
               multipleCustomDrop[index]?.current?.getBoundingClientRect()?.top -
-              element.getBoundingClientRect().height;
-
+              top;
             checkDrop(multipleRefs, multipleRefs[index]?.current, [
               dropX,
               dropY,

@@ -75,7 +75,7 @@ const Movable = React.forwardRef(
             setPos([posX, posY]);
             setActiveIndicator("correct");
 
-            onFinished(endEvent);
+            onFinished(endEvent, element);
           } else {
             onFail(element);
             setPos([0, 0]);

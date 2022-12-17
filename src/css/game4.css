@@ -1,82 +1,255 @@
 .game4 {
   margin-top: 110px;
   width: 1000px;
-  margin-left: 200px;
 }
-.game4 .wrapper {
+.game4 .balls {
+  display: flex;
+  flex-wrap: wrap;
+  width: 460px;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  margin: 0 auto;
+}
+.game4 .balls .ball {
+  cursor: pointer;
+}
+.game4 .balls .ball:nth-child(6) {
+  margin-left: 50px !important;
+}
+.game4 .box {
+  background-color: #1268b1;
+  width: 325px;
+  height: 125px;
+  font-size: 50px;
+  color: white;
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
-}
-.game4 .wrapper .dash {
-  margin-right: 5px;
-}
-.game4 .wrapper .line {
-  margin-right: 15px;
-  transition: 0.3s linear;
-}
-.game4 .wrapper .image {
-  height: 0px;
-}
-.game4 .wrapper .image img {
-  height: 50px;
-  transform: translateY(-50%);
-  margin-left: 15px;
-}
-.game4 h3 {
-  margin-bottom: 15px;
-}
-.game4 .line {
-  display: flex;
-  height: 37.4px;
-}
-.game4 .line .dropdown:first-child {
-  margin-right: 5px;
-  transition: 0.3s linear;
-}
-.game4 .line .dropdown:last-child {
-  margin-left: 2.5px;
-  transition: 0.3s linear;
-}
-.game4 .line .dropdown .list {
-  display: flex;
-  flex-direction: column;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  background-color: #5ac8f5;
-  text-align: center;
-  color: #fff;
-  font-size: 18px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: 0.1s linear;
-  font-weight: 400;
-  position: relative;
-}
-.game4 .line .dropdown .list p {
-  background-color: rgba(255, 255, 255, 0);
-  padding: 7.5px;
-  transition: 0.3s linear;
-}
-.game4 .line .dropdown .list p img {
-  height: 12px;
-}
-.game4 .line .dropdown .list p:hover {
-  background-color: rgba(255, 255, 255, 0.199);
-}
-.game4 .line .dropdown .done {
-  cursor: default;
-  background-color: rgba(255, 255, 255, 0);
-  color: #a0c814;
+  justify-content: center;
   font-weight: bold;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 75px;
 }
-.game4 .line-done {
-  margin-right: 0px !important;
+.game4 .hourglass,
+.game4 .hourglass .before,
+.game4 .hourglass .after {
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
 }
-.game4 .line-done .dropdown:first-child {
-  margin-right: -5px;
+.game4 .hourglass {
+  margin: 0 auto;
+  margin-top: 15px;
+  --polygonH: polygon(
+    0% 0%,
+    100% 0%,
+    100% 5.55%,
+    95% 5.55%,
+    95% 28%,
+    60% 46%,
+    60% 54%,
+    95% 72%,
+    95% 94.45%,
+    100% 94.45%,
+    100% 100%,
+    0% 100%,
+    0% 94.45%,
+    5% 94.45%,
+    5% 72%,
+    40% 54%,
+    40% 46%,
+    5% 28%,
+    5% 5.55%,
+    0% 5.55%
+  );
+  -webkit-animation-name: flip;
+          animation-name: flip;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  background-image: linear-gradient(#255ff4 0.5em, rgba(115, 122, 140, 0.3333333333) 0.5em 8.5em, #255ff4 8.5em);
+  clip-path: var(--polygonH);
+  transform: scale(0.75);
+  -webkit-clip-path: var(--polygonH);
+  overflow: hidden;
+  position: relative;
+  width: 5em;
+  height: 9em;
+  z-index: 0;
 }
-.game4 .line-done .dropdown:last-child {
-  margin-left: -15px;
+.game4 .hourglass .before,
+.game4 .hourglass .after {
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  content: "";
+  display: block;
+  position: absolute;
+}
+.game4 .hourglass .before {
+  --polygonB1: polygon(
+    0% 0%,
+    100% 0%,
+    100% 24%,
+    50% 47%,
+    50% 47%,
+    50% 47%,
+    50% 47%,
+    50% 47%,
+    50% 47%,
+    50% 47%,
+    50% 47%,
+    0% 24%
+  );
+  --polygonB2: polygon(
+    0% 4%,
+    100% 4%,
+    100% 24%,
+    55% 45%,
+    55% 100%,
+    55% 100%,
+    55% 100%,
+    45% 100%,
+    45% 100%,
+    45% 100%,
+    45% 45%,
+    0% 24%
+  );
+  --polygonB3: polygon(
+    0% 24%,
+    100% 24%,
+    100% 24%,
+    55% 45%,
+    55% 80%,
+    100% 100%,
+    100% 100%,
+    0% 100%,
+    0% 100%,
+    45% 80%,
+    45% 45%,
+    0% 24%
+  );
+  --polygonB4: polygon(
+    45% 45%,
+    55% 45%,
+    55% 45%,
+    55% 45%,
+    55% 58%,
+    100% 76%,
+    100% 100%,
+    0% 100%,
+    0% 76%,
+    45% 58%,
+    45% 45%,
+    45% 45%
+  );
+  --polygonB5: polygon(
+    50% 53%,
+    50% 53%,
+    50% 53%,
+    50% 53%,
+    50% 53%,
+    100% 76%,
+    100% 100%,
+    0% 100%,
+    0% 76%,
+    50% 53%,
+    50% 53%,
+    50% 53%
+  );
+  -webkit-animation-name: fill;
+          animation-name: fill;
+  background: #1268b1;
+  background-size: 100% 3.6em;
+  -webkit-clip-path: var(--polygonB1);
+          clip-path: var(--polygonB1);
+  top: 0.5em;
+  left: 0.5em;
+  width: 4em;
+  height: 8em;
+  z-index: 1;
+}
+.game4 .hourglass .after {
+  -webkit-animation-name: glare;
+          animation-name: glare;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0.5em, rgba(0, 0, 0, 0.2) 0.5em 1.5em, rgba(0, 0, 0, 0) 1.5em 3.5em, rgba(255, 255, 255, 0.2) 3.5em 4.5em, rgba(255, 255, 255, 0) 4.5em 6.5em, rgba(0, 0, 0, 0.2) 6.5em 7.5em, rgba(0, 0, 0, 0) 7.5em) 0 0/100% 0.5em, linear-gradient(90deg, rgba(0, 0, 0, 0) 0.75em, rgba(0, 0, 0, 0.2) 0.75em 1.25em, rgba(0, 0, 0, 0) 1.25em 3.75em, rgba(255, 255, 255, 0.2) 3.75em 4.25em, rgba(255, 255, 255, 0) 4.25em 6.75em, rgba(0, 0, 0, 0.2) 6.75em 7.25em, rgba(0, 0, 0, 0) 7.25em) 0 0.5em/100% 8em, linear-gradient(90deg, rgba(0, 0, 0, 0) 0.5em, rgba(0, 0, 0, 0.2) 0.5em 1.5em, rgba(0, 0, 0, 0) 1.5em 3.5em, rgba(255, 255, 255, 0.2) 3.5em 4.5em, rgba(255, 255, 255, 0) 4.5em 6.5em, rgba(0, 0, 0, 0.2) 6.5em 7.5em, rgba(0, 0, 0, 0) 7.5em) 0 100%/100% 0.5em;
+  background-repeat: repeat-x;
+  top: 0;
+  left: -3em;
+  width: 200%;
+  height: 100%;
+  z-index: 2;
+}
+@-webkit-keyframes fill {
+  from {
+    clip-path: var(--polygonB1);
+    -webkit-clip-path: var(--polygonB1);
+  }
+  10% {
+    clip-path: var(--polygonB2);
+    -webkit-clip-path: var(--polygonB2);
+  }
+  45% {
+    clip-path: var(--polygonB3);
+    -webkit-clip-path: var(--polygonB3);
+  }
+  80% {
+    clip-path: var(--polygonB4);
+    -webkit-clip-path: var(--polygonB4);
+  }
+  85%, to {
+    clip-path: var(--polygonB5);
+    -webkit-clip-path: var(--polygonB5);
+  }
+}
+@keyframes fill {
+  from {
+    clip-path: var(--polygonB1);
+    -webkit-clip-path: var(--polygonB1);
+  }
+  10% {
+    clip-path: var(--polygonB2);
+    -webkit-clip-path: var(--polygonB2);
+  }
+  45% {
+    clip-path: var(--polygonB3);
+    -webkit-clip-path: var(--polygonB3);
+  }
+  80% {
+    clip-path: var(--polygonB4);
+    -webkit-clip-path: var(--polygonB4);
+  }
+  85%, to {
+    clip-path: var(--polygonB5);
+    -webkit-clip-path: var(--polygonB5);
+  }
+}
+@-webkit-keyframes glare {
+  from, 90% {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(3em);
+  }
+}
+@keyframes glare {
+  from, 90% {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(3em);
+  }
+}
+@-webkit-keyframes flip {
+  from, 90% {
+    transform: rotate(0) scale(0.75);
+  }
+  to {
+    transform: rotate(180deg) scale(0.75);
+  }
+}
+@keyframes flip {
+  from, 90% {
+    transform: rotate(0) scale(0.75);
+  }
+  to {
+    transform: rotate(180deg) scale(0.75);
+  }
 }
