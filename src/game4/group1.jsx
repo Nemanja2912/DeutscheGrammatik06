@@ -137,12 +137,6 @@ const Group1 = ({ setPart }) => {
   const [boxList, setBoxList] = useState([...subject]);
 
   useEffect(() => {
-    if (boxList.length === 0) {
-      setPart();
-    }
-  }, [boxList]);
-
-  useEffect(() => {
     let isActive = false;
 
     for (let i = 0; i < active.length; i++) {
@@ -240,6 +234,11 @@ const Group1 = ({ setPart }) => {
             indexInNewList >= subjectList.length - 1 ? 0 : indexInNewList + 1;
           setBoxList([...subjectList]);
           setSubjectIndex(index);
+
+          if (subjectList.length === 0) {
+            return setPart();
+          }
+
           setBoxLevel(3);
 
           setTimeout(() => {

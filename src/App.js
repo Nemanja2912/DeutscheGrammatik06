@@ -32,14 +32,14 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Menu
+      <Menu
         navMenuItem={navMenuItem}
         setNavMenuItem={setNavMenuItem}
         navButtonRef={navButtonRef}
         menuRef={menuRef}
-      /> */}
+      />
 
-      {/*  {navMenuItem === 0 && (
+      {navMenuItem === 0 && (
         <Game1
           nextLesson={() => {
             menuRef.current.click();
@@ -79,9 +79,7 @@ function App() {
           }}
         />
       )}
-      {navMenuItem === 4 && <Game5 />} */}
-
-      <Game4 />
+      {navMenuItem === 4 && <Game5 />}
     </div>
   );
 }

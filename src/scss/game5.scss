@@ -5,214 +5,74 @@
   flex-direction: column;
   align-items: center;
 
-  .image {
-    margin-bottom: 25px;
-    width: max-content;
-    height: 200px;
+  .group {
+    transition: 0.5s;
+    opacity: 0;
+    animation-name: opacity;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .blur-img {
+      filter: blur(8px);
+      -webkit-filter: blur(8px);
+    }
+
+    .show-img {
+      filter: blur(0px);
+      -webkit-filter: blur(0px);
+    }
 
     img {
-      position: absolute;
-      width: 200px;
-      transition: left 0.5s linear;
-    }
-
-    .move-animation {
-      animation: move 700ms linear forwards;
-    }
-  }
-
-  span {
-    padding: 2.5px;
-    border-radius: 5px;
-    transition: 0.5s linear;
-    position: relative;
-    left: 0;
-    top: 0;
-  }
-
-  .drop-zones.move-animation {
-    animation: moveDrop 700ms linear forwards;
-  }
-
-  .drop-zones {
-    display: flex;
-    margin-bottom: 25px;
-    gap: 25px;
-    position: relative;
-
-    .drop {
-      display: flex;
-      position: relative;
-
-      .blank {
-        border: 3px solid #5ac8f5;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 150px;
-        font-size: 30px;
-        height: 75px;
-      }
-    }
-  }
-
-  .word-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    font-size: 20px;
-    height: 75px;
-    background-color: #d6d9db;
-  }
-
-  .interactive-word {
-    display: flex;
-    gap: 25px;
-    position: relative;
-    z-index: 1000;
-
-    .word-box {
-      background-color: #5ac8f5;
-      cursor: pointer;
-      position: relative;
-      transition: 0.3s linear;
-
-      &:hover {
-        background-color: #92d8f5;
-      }
-    }
-
-    .finish {
-      background-color: #d6d9db;
-      cursor: default;
-      // border: 3px solid peru;
-
-      p {
-        position: relative;
-      }
-
-      &:hover {
-        background-color: #d6d9db;
-      }
-    }
-  }
-
-  .interactive-word.move-animation {
-    animation: moveInteractive 700ms linear forwards;
-  }
-
-  @keyframes moveInteractive {
-    from {
-      top: 100vh;
-    }
-
-    to {
-      top: 0;
-    }
-  }
-
-  .clone-boxes {
-    display: flex;
-    position: absolute;
-    z-index: 100;
-
-    .background {
-      background-color: #d6d9db;
-      width: 300px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      margin-bottom: 10px;
+      height: 350px;
+      width: auto;
       transition: 0.5s linear;
-      z-index: -1;
     }
 
     .box {
+      background-color: #d6d9db;
+      margin: auto;
+      width: max-content;
+      border-radius: 5px;
+      padding: 5px;
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .line {
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 150px;
       font-size: 20px;
-      height: 75px;
+      gap: 15px;
+      justify-content: center;
 
-      .choose {
-        background-color: #5ac8f5;
-        cursor: pointer;
-        position: relative;
+      .wrapper {
+        padding: 5px 10px;
+        padding-bottom: 10px;
+        border-radius: 10px;
+        width: max-content;
 
-        &:hover {
-          background-color: hsla(197, 89%, 66%, 0.5) !important;
+        .guess-word {
+          p {
+            border-bottom: 5px;
+            color: white;
+          }
         }
       }
     }
-
-    .box-swipe {
-      order: 2;
-    }
   }
 }
 
-.tape {
-  width: 1000px;
-  margin-top: 50px;
-
-  .boxes {
-    pointer-events: none;
-    display: flex;
-
-    .box {
-      position: absolute;
-      left: 425px;
-      z-index: 999;
-      background-color: #d6d9db;
-      width: 150px;
-      font-size: 20px;
-      height: 75px;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      line-height: 150%;
-      transition: top 0.5s linear, left 0.5s linear;
-
-      span {
-        transition: 0.5s linear;
-      }
-
-      span.blury {
-        color: #1d65a1;
-        text-shadow: #1d65a1 0px 0px 2px;
-      }
-    }
-  }
-}
-
-.game5line {
-  height: 100px;
-  background-color: #ededed;
-  width: 1000px;
-}
-
-@keyframes move {
+@keyframes opacity {
   from {
-    left: -500px;
+    opacity: 0;
   }
 
   to {
-    left: 400px;
-  }
-}
-
-@keyframes moveDrop {
-  from {
-    left: -1000px;
-  }
-
-  to {
-    left: 0px;
+    opacity: 1;
   }
 }

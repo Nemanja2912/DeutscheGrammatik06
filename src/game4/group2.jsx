@@ -1,13 +1,8 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  createRef,
-  useCallback,
-} from "react";
+import React, { useState, useRef, useEffect, useReducer } from "react";
 import Indicator from "../UI/Indicator";
 
 import Ball from "./../UI/Ball";
+import { createAnimation, moveIn, moveOut } from "./animation";
 
 const balls = [
   {
@@ -134,184 +129,148 @@ for (let i = 0; i < balls.length; i++) {
   activeList.push("neutral");
 }
 
-let time;
+let flip, fill;
 
-let timeout;
+const initialState = {
+  disable: true,
+  subjectIndex: 0,
+  active: [...activeList],
+  boxList: [...subject],
+  isDone: false,
+};
 
-const Group2 = () => {
-  const [active, setActive] = useState([...activeList]);
-  const [boxLevel, setBoxLevel] = useState(0);
-  const [disable, setDisable] = useState(true);
+function reducer(state, action) {
+  switch (action.type) {
+    case "setDisable":
+      return { ...state, disable: action.payload };
+    case "setActive":
+      return {
+        ...state,
+        active: [...action.payload],
+      };
 
-  const [animationName, setAnimationName] = useState("none");
-  const [animationDuration, setAnimationDuration] = useState(8000);
+    case "increaseSubjectIndex":
+      const boxList = [];
 
-  const [subjectIndex, setSubjectIndex] = useState(0);
-  const [boxList, setBoxList] = useState([...subject]);
+      for (let i = 0; i < state.boxList.length; i++) {
+        for (let j = 0; j < state.active.length; j++) {
+          if (state.active[j] === "correct") continue;
+
+          if (balls[j].type.includes(state.boxList[i].type)) {
+            boxList.push(state.boxList[i]);
+            break;
+          }
+        }
+      }
+
+      let isDone = false;
+
+      if (boxList.length === 0) {
+        isDone = true;
+      }
+
+      const subjectIndex =
+        state.subjectIndex >= boxList.length - 1 ? 0 : state.subjectIndex + 1;
+
+      return {
+        ...state,
+        subjectIndex,
+        boxList,
+        isDone,
+      };
+
+    default:
+      throw new Error();
+  }
+}
+
+const Group2 = ({ setPart }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const [activeIndicator, setActiveIndicator] = useState(false);
 
-  const resetAnimation = () => {
-    setAnimationName("none");
+  const hourglassRef = useRef(null);
+  const beforeRef = useRef(null);
+
+  const boxRef = useRef(null);
+
+  const fastForward = () => {
+    flip.playbackRate = 12;
+    fill.playbackRate = 12;
+  };
+
+  const startAnimation = () => {
+    flip.playbackRate = 1;
+    fill.playbackRate = 1;
+
+    flip.play();
+    fill.play();
   };
 
   useEffect(() => {
     setTimeout(() => {
-      setBoxLevel(1);
+      moveIn(boxRef.current);
 
       setTimeout(() => {
-        setDisable(false);
-        // activeAnimation();
+        dispatch({ type: "setDisable", payload: false });
+
+        startAnimation();
       }, 500);
     }, 500);
   }, []);
 
-  const activeAnimation = useCallback(() => {
-    const speed = 8000;
-    time = +new Date();
-
-    setAnimationName("");
-
-    setAnimationDuration(speed);
-
-    if (boxList.length === 0) return;
-
-    timeout = setTimeout(() => {
-      setDisable(true);
-
-      setActiveIndicator(["wrong"]);
-
-      setTimeout(() => {
-        setActiveIndicator(false);
-      }, 1250);
-
-      setTimeout(() => {
-        setTimeout(() => {
-          setBoxLevel(2);
-
-          setTimeout(() => {
-            const index =
-              subjectIndex === boxList.length - 1 ? 0 : subjectIndex + 1;
-
-            setSubjectIndex(index);
-
-            setBoxLevel(3);
-
-            setTimeout(() => {
-              setBoxLevel(0);
-              setTimeout(() => {
-                setBoxLevel(1);
-
-                setTimeout(() => {
-                  setDisable(false);
-                }, 500);
-              }, 500);
-            }, 50);
-          }, 500);
-        }, 500);
-      }, 500);
-    }, speed);
-  }, [subjectIndex, boxList.length]);
-
   const handleCheck = (index) => {
-    setDisable(true);
+    dispatch({ type: "setDisable", payload: true });
 
-    const ballActiveList = [...active];
+    const ballActiveList = [...state.active];
 
-    if (balls[index].type.includes(boxList[subjectIndex].type)) {
+    if (balls[index].type.includes(state.boxList[state.subjectIndex].type)) {
       ballActiveList[index] = "correct";
 
       setActiveIndicator(["correct"]);
-
-      const newTime = +new Date();
-      let speed = newTime - time + 200;
-
-      setAnimationDuration(speed);
     } else {
       setActiveIndicator(["wrong"]);
-      setDisable(false);
 
-      return;
+      dispatch({ type: "setDisable", payload: false });
+
+      return null;
     }
 
-    clearTimeout(timeout);
+    fastForward();
 
-    setTimeout(() => {
-      setActiveIndicator(false);
-    }, 1250);
-
-    setActive([...ballActiveList]);
-
-    setTimeout(() => {
-      for (let i = 0; i < ballActiveList.length; i++) {
-        if (ballActiveList[i] === "correct") {
-          ballActiveList[i] = "hide";
-        }
-      }
-
-      setActive([...ballActiveList]);
-
-      setTimeout(() => {
-        const subjectList = [];
-
-        for (let i = 0; i < ballActiveList.length; i++) {
-          if (ballActiveList[i] === "fail") {
-            ballActiveList[i] = "neutral";
-          }
-        }
-
-        let indexInNewList = subjectIndex;
-
-        for (let i = 0; i < boxList.length; i++) {
-          for (let j = 0; j < ballActiveList.length; j++) {
-            if (ballActiveList[j] === "hide") continue;
-
-            if (balls[j].type.includes(boxList[i].type)) {
-              subjectList.push(boxList[i]);
-
-              break;
-            }
-          }
-        }
-
-        setActive([...ballActiveList]);
-
-        setBoxLevel(2);
-
-        setTimeout(() => {
-          const index =
-            indexInNewList >= subjectList.length - 1 ? 0 : indexInNewList + 1;
-
-          setSubjectIndex(index);
-
-          setBoxList([...subjectList]);
-
-          setBoxLevel(3);
-
-          setTimeout(() => {
-            setBoxLevel(0);
-            setTimeout(() => {
-              setBoxLevel(1);
-
-              setTimeout(() => {
-                setDisable(false);
-              }, 500);
-            }, 500);
-          }, 50);
-        }, 500);
-      }, 500);
-    }, 500);
+    dispatch({ type: "setActive", payload: [...ballActiveList] });
   };
 
   useEffect(() => {
-    if (boxLevel === 1 && !disable) {
-      activeAnimation();
-    }
-  }, [boxLevel, activeAnimation, disable]);
+    const hourglass = hourglassRef.current;
+    const before = beforeRef.current;
 
-  const handleIteration = () => {
-    resetAnimation();
-  };
+    [flip, fill] = createAnimation(hourglass, before, flip, fill);
+
+    flip.onfinish = () => {
+      dispatch({ type: "setDisable", payload: true });
+
+      const boxOut = moveOut(boxRef.current);
+
+      boxOut.onfinish = () => {
+        const boxIn = moveIn(boxRef.current);
+
+        dispatch({ type: "increaseSubjectIndex" });
+
+        boxIn.onfinish = () => {
+          startAnimation();
+
+          dispatch({ type: "setDisable", payload: false });
+        };
+      };
+    };
+  }, []);
+
+  useEffect(() => {
+    if (state.isDone) {
+      setPart();
+    }
+  }, [state.isDone, setPart]);
 
   return (
     <>
@@ -320,13 +279,14 @@ const Group2 = () => {
           return (
             <Ball
               style={{
-                pointerEvents: disable ? "none" : "initial",
-                transform: active[index] === "hide" ? "scale(0)" : "scale(1)",
-                transition: "0.1s linear",
+                pointerEvents: state.disable ? "none" : "initial",
+                transform:
+                  state.active[index] === "correct" ? "scale(0)" : "scale(1)",
+                transition: "0.1s linear 0.5s",
               }}
               onClick={() => handleCheck(index)}
               key={index}
-              color={active[index] === "correct" ? "#A0C814" : "#cfd3d5"}
+              color={state.active[index] === "correct" ? "#A0C814" : "#cfd3d5"}
             >
               {item?.word}
             </Ball>
@@ -334,47 +294,21 @@ const Group2 = () => {
         })}
       </div>
 
-      {boxList.length && (
-        <div
-          onAnimationIterationCapture={handleIteration}
-          className="hourglass"
-          style={{
-            animationName,
-            animationDuration: animationDuration + "ms",
-          }}
-        >
-          <div
-            className="before"
-            style={{
-              animationName,
-              animationDuration: animationDuration + "ms",
-            }}
-          ></div>
-          <div
-            className="after"
-            style={{
-              animationName,
-              animationDuration: animationDuration + "ms",
-            }}
-          ></div>
+      {state.boxList.length && (
+        <div className="hourglass" ref={hourglassRef}>
+          <div ref={beforeRef} className="before"></div>
         </div>
       )}
 
-      {boxList.length > 0 && (
+      {state.boxList.length > 0 && (
         <div
+          ref={boxRef}
           className="box"
           style={{
             marginTop: 0,
-            transform:
-              boxLevel === 0 || boxLevel === 3
-                ? "translateX(100vw)"
-                : boxLevel === 2
-                ? "translateX(-100vw)"
-                : "translateX(0vw)",
-            transition: boxLevel === 3 ? "0s linear" : "0.25s linear",
           }}
         >
-          {boxList[subjectIndex]?.word}
+          {state.boxList[state.subjectIndex]?.word}
         </div>
       )}
 

@@ -203,7 +203,10 @@ const GuessWordImproved = ({
   return (
     <div className="guess-word" style={guessStyle} ref={guessWordRef}>
       {letterList.map((letter, index) => (
-        <p style={{ ...letterStyle, opacity: word[index] === " " ? 0 : 1 }}>
+        <p
+          key={index}
+          style={{ ...letterStyle, opacity: word[index] === " " ? 0 : 1 }}
+        >
           {letter}
         </p>
       ))}
