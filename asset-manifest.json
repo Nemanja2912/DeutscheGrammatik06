@@ -1,18 +1,31 @@
 {
   "files": {
-    "main.css": "/DeutscheGrammatik06/static/css/main.b44f6bf6.css",
-    "main.js": "/DeutscheGrammatik06/static/js/main.4a5e1f1a.js",
+    "main.css": "/DeutscheGrammatik06/static/css/main.ca5e3b4d.css",
+    "main.js": "/DeutscheGrammatik06/static/js/main.32056f74.js",
+    "static/media/6.jpg": "/DeutscheGrammatik06/static/media/6.0684f1b84176ded4ee20.jpg",
+    "static/media/1.jpg": "/DeutscheGrammatik06/static/media/1.6d42dc2362cb601db3ca.jpg",
+    "static/media/2.jpg": "/DeutscheGrammatik06/static/media/2.9fb7fb4f8d9431eaee2b.jpg",
+    "static/media/8.jpg": "/DeutscheGrammatik06/static/media/8.eb153a0473e742d6e37b.jpg",
+    "static/media/3.jpg": "/DeutscheGrammatik06/static/media/3.0179cd1d9f92d289d58c.jpg",
     "static/media/GoetheGothic.ttf": "/DeutscheGrammatik06/static/media/GoetheGothic.8f1c1efe083825857c78.ttf",
     "static/media/GoetheGothicBold.ttf": "/DeutscheGrammatik06/static/media/GoetheGothicBold.612e7d204308972bcca6.ttf",
+    "static/media/5.jpg": "/DeutscheGrammatik06/static/media/5.a4c548291b1a04258ed0.jpg",
+    "static/media/4.jpg": "/DeutscheGrammatik06/static/media/4.b10d45b5abc4f8e619ec.jpg",
+    "static/media/7.jpg": "/DeutscheGrammatik06/static/media/7.720de1622372585646e2.jpg",
     "index.html": "/DeutscheGrammatik06/index.html",
     "static/media/wrong.svg": "/DeutscheGrammatik06/static/media/wrong.e1e9b4abfad909edcfa12b2b7ce548b7.svg",
+    "static/media/shift.svg": "/DeutscheGrammatik06/static/media/shift.b6f8a141db78818b481737d643b06d00.svg",
+    "static/media/space.svg": "/DeutscheGrammatik06/static/media/space.14804998abea297e45ab877cb0dbcc3f.svg",
+    "static/media/enter.svg": "/DeutscheGrammatik06/static/media/enter.54b4b86314e9b70cda0fb0b74c97ff8f.svg",
+    "static/media/backspace.svg": "/DeutscheGrammatik06/static/media/backspace.8972707aaf02470711ca5312c4235dcd.svg",
+    "static/media/down.svg": "/DeutscheGrammatik06/static/media/down.6cbec648f7b1eb1108f3e4e5c88ea4f5.svg",
     "static/media/file.svg": "/DeutscheGrammatik06/static/media/file.acd35ab175daf08aee91aa9d384cca70.svg",
     "static/media/arrow_down.svg": "/DeutscheGrammatik06/static/media/arrow_down.280089b6feef82aaf59e40df2afc42d4.svg",
-    "main.b44f6bf6.css.map": "/DeutscheGrammatik06/static/css/main.b44f6bf6.css.map",
-    "main.4a5e1f1a.js.map": "/DeutscheGrammatik06/static/js/main.4a5e1f1a.js.map"
+    "main.ca5e3b4d.css.map": "/DeutscheGrammatik06/static/css/main.ca5e3b4d.css.map",
+    "main.32056f74.js.map": "/DeutscheGrammatik06/static/js/main.32056f74.js.map"
   },
   "entrypoints": [
-    "static/css/main.b44f6bf6.css",
-    "static/js/main.4a5e1f1a.js"
+    "static/css/main.ca5e3b4d.css",
+    "static/js/main.32056f74.js"
   ]
 }
