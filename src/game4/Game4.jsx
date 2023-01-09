@@ -6,36 +6,11 @@ import Group1 from "./group1";
 import Group2 from "./group2";
 import Static from "./static";
 
-const Game4 = () => {
+const Game4 = ({ nextLesson }) => {
   const [part, setPart] = useState(0);
-
-  const [helpOverlay, setHelpOverlay] = useState(false);
-  const [helpFingerPosition, setHelpFingerPosition] = useState("init");
-  const [preventHelp, setPreventHelp] = useState(false);
-  const [infoTitle, setInfoTitle] = useState();
-  const [infoText, setInfoText] = useState(
-    <>
-      Welche Verbformen passen zum Wort unten? <br />
-      Klicke die Verben an.
-    </>
-  );
-  const [infoOverlay, setInfoOverlay] = useState(true);
 
   const handleInfo = () => {
     setPart(1);
-
-    setInfoText(
-      <>
-        Welche Verbform passt zum Wort unten? <br />
-        Klicke ein Verb an.
-        <br />
-        Diese Aufgabe hat ein Zeitlimit.
-        <br />
-        Du hast nur fünf Sekunden Zeit pro Verb!
-      </>
-    );
-
-    setInfoOverlay(true);
   };
 
   return (
@@ -56,15 +31,27 @@ const Game4 = () => {
         </div>
       </div>
 
-      <StatusBar
-        infoText={infoText}
-        infoOverlay={infoOverlay}
-        setInfoOverlay={setInfoOverlay}
-        setHelpOverlay={setHelpOverlay}
-        preventHelp={preventHelp}
-        helpFingerPosition={helpFingerPosition}
-        infoTitle={infoTitle}
-      />
+      {part === 2 && (
+        <div
+          className="wrapper"
+          style={{
+            width: 1000,
+            position: "absolute",
+            top: 0,
+            bottom: 50,
+          }}
+        >
+          <div
+            className="button-show"
+            style={{ margin: "auto", left: 0, right: 0 }}
+            onClick={() => {
+              nextLesson();
+            }}
+          >
+            WEITER
+          </div>
+        </div>
+      )}
     </>
   );
 };

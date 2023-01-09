@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import MovableEdited from "./movable/movableEdited";
+import StatusBar from "../UI/StatusBar";
 
 const labels = ["Ich", "Wir", "Du", "Ihr", "Er/Sie/Es", "Sie"];
 
@@ -50,11 +51,24 @@ const midList = [
   ["nehmen", "fahren", "lesen"],
 ];
 
-const Screen3 = ({ setEndButton }) => {
+const Screen3 = ({ setEndButton, step }) => {
+  const [helpOverlay, setHelpOverlay] = useState(false);
+  const [helpFingerPosition, setHelpFingerPosition] = useState("init");
+  const [preventHelp, setPreventHelp] = useState(false);
+  const [infoTitle, setInfoTitle] = useState();
+  const [infoText, setInfoText] = useState(
+    <>
+      Wie bildet man das Präsens? <br />
+      Zieh den Infinitiv in die Lücke zwischen <br />
+      dem Pronomen und der Endung.{" "}
+    </>
+  );
+  const [infoOverlay, setInfoOverlay] = useState(false);
+
   const [isDone, setIsDone] = useState([
-    [false, false, false, false, false],
-    [false, false, false, false, false],
-    [false, false, false, false, false],
+    [true, true, false, true, false, true],
+    [true, true, false, true, false, true],
+    [true, true, false, true, false, true],
   ]);
   const [disable, setDisable] = useState(false);
 
@@ -134,21 +148,27 @@ const Screen3 = ({ setEndButton }) => {
     lineRefs[lineIndex].current.children[index].style.zIndex = 9;
   };
 
-  const handleFinish = (event, element, elementIndex, lineIndex) => {
+  const handleFinish = (
+    event,
+    element,
+    elementIndex,
+    lineIndex,
+    helpBoxIndex = -1
+  ) => {
     let index = -1;
     setDisable(true);
-
-    console.log(isDone[elementIndex]);
+    setPreventHelp(true);
 
     for (let i = 0; i < boxRefs.length; i++) {
       if (isDone[elementIndex][i] === true) continue;
 
       if (
-        boxRefs[i].current &&
-        event.clientX > boxRefs[i].current.getBoundingClientRect().left &&
-        event.clientX < boxRefs[i].current.getBoundingClientRect().right &&
-        event.clientY > boxRefs[i].current.getBoundingClientRect().top &&
-        event.clientY < boxRefs[i].current.getBoundingClientRect().bottom
+        (boxRefs[i].current &&
+          event.clientX > boxRefs[i].current.getBoundingClientRect().left &&
+          event.clientX < boxRefs[i].current.getBoundingClientRect().right &&
+          event.clientY > boxRefs[i].current.getBoundingClientRect().top &&
+          event.clientY < boxRefs[i].current.getBoundingClientRect().bottom) ||
+        helpBoxIndex === i
       ) {
         index = i;
 
@@ -183,10 +203,9 @@ const Screen3 = ({ setEndButton }) => {
 
         setTimeout(() => {
           setWordChange((prev) => {
-            let list = [...prev];
-            list[lineIndex][elementIndex] = true;
+            prev[lineIndex][elementIndex] = true;
 
-            return [...list];
+            return [...prev];
           });
 
           setTimeout(() => {
@@ -224,6 +243,9 @@ const Screen3 = ({ setEndButton }) => {
 
                 setTimeout(() => {
                   setDisable(false);
+
+                  element.style.zIndex = 9;
+                  setPreventHelp(false);
                 }, 500);
               }, 500);
             }, 750);
@@ -233,6 +255,92 @@ const Screen3 = ({ setEndButton }) => {
     }, 500);
   };
 
+  useEffect(() => {
+    if (helpOverlay) {
+      setPreventHelp(true);
+
+      let elementIndex = -1;
+      let boxIndex = -1;
+
+      loop1: for (let i = 0; i < wordDone.length; i++) {
+        for (let j = 0; j < wordDone[i].length; j++) {
+          elementIndex++;
+
+          if (!wordDone[i][j]) {
+            setWordDone((prev) => {
+              prev[i][j] = true;
+
+              return [...prev];
+            });
+            break loop1;
+          }
+        }
+      }
+
+      const funcElementIndex =
+        elementIndex > 2 ? elementIndex - 3 : elementIndex;
+
+      for (let i = 0; i < isDone.length; i++) {
+        for (let j = 0; j < isDone[i].length; j++) {
+          if (isDone[funcElementIndex][j] === true) continue;
+
+          if (!isDone[i][j]) {
+            boxIndex = j;
+            break;
+          }
+        }
+      }
+
+      let lineIndex = elementIndex < 3 ? 0 : 1;
+
+      if (elementIndex === -1 || boxIndex === -1 || lineIndex === -1) return;
+
+      const element = document.querySelectorAll(".element-move2")[elementIndex];
+
+      element.style.zIndex = 11;
+
+      setHelpFingerPosition([
+        element.getBoundingClientRect().left +
+          element.getBoundingClientRect().width / 2 -
+          5,
+        element.getBoundingClientRect().top +
+          element.getBoundingClientRect().height / 2,
+      ]);
+
+      setTimeout(() => {
+        const dropX =
+          dropRefs[boxIndex]?.current?.getBoundingClientRect()?.right -
+          7.5 -
+          element.children[0].getBoundingClientRect()?.width;
+
+        let top = element.getBoundingClientRect().height;
+
+        const dropY =
+          dropRefs[boxIndex]?.current?.getBoundingClientRect()?.top - top;
+
+        element.style.transition = "1s linear";
+
+        element.style.left =
+          dropX - element.getBoundingClientRect().left + "px";
+
+        element.style.top = dropY - element.getBoundingClientRect().top + "px";
+
+        setHelpFingerPosition([
+          dropX + element.getBoundingClientRect().width / 2 - 5,
+          dropY + element.getBoundingClientRect().height / 2,
+        ]);
+
+        setTimeout(() => {
+          element.style.transition = "0s linear";
+
+          setHelpFingerPosition("init");
+
+          handleFinish(true, element, funcElementIndex, lineIndex, boxIndex);
+        }, 1250);
+      }, 1250);
+    }
+  }, [helpOverlay]);
+
   return (
     <>
       <div className="screen2 screen3">
@@ -240,6 +348,7 @@ const Screen3 = ({ setEndButton }) => {
           <div className="line1" ref={lineRefs[0]}>
             {words.map((word, index) => (
               <MovableEdited
+                className="element-move2"
                 key={index}
                 style={{
                   pointerEvents: wordDone[0][index] || disable ? "none" : "",
@@ -268,6 +377,7 @@ const Screen3 = ({ setEndButton }) => {
           <div className="line2" ref={lineRefs[1]}>
             {words.map((word, index) => (
               <MovableEdited
+                className="element-move2"
                 key={index}
                 style={{
                   pointerEvents: wordDone[1][index] || disable ? "none" : "",
@@ -332,6 +442,18 @@ const Screen3 = ({ setEndButton }) => {
       </div>
 
       <div id="letter"></div>
+
+      {step === 2 && (
+        <StatusBar
+          infoText={infoText}
+          infoOverlay={infoOverlay}
+          setInfoOverlay={setInfoOverlay}
+          setHelpOverlay={setHelpOverlay}
+          preventHelp={preventHelp}
+          helpFingerPosition={helpFingerPosition}
+          infoTitle={infoTitle}
+        />
+      )}
     </>
   );
 };

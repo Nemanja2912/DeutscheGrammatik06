@@ -3,6 +3,7 @@ import Indicator from "../UI/Indicator";
 
 import Ball from "./../UI/Ball";
 import { createAnimation, moveIn, moveOut } from "./animation";
+import StatusBar from "../UI/StatusBar";
 
 const balls = [
   {
@@ -187,6 +188,20 @@ function reducer(state, action) {
 const Group2 = ({ setPart }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [helpOverlay, setHelpOverlay] = useState(false);
+  const [helpFingerPosition, setHelpFingerPosition] = useState("init");
+  const [preventHelp, setPreventHelp] = useState(false);
+  const [infoTitle, setInfoTitle] = useState();
+  const [infoText, setInfoText] = useState(
+    <>
+      Welche Verbform passt zum Wort unten? <br />
+      Klicke ein Verb an. <br />
+      Diese Aufgabe hat ein Zeitlimit. <br />
+      Du hast nur fünf Sekunden Zeit pro Verb!
+    </>
+  );
+  const [infoOverlay, setInfoOverlay] = useState(true);
+
   const [activeIndicator, setActiveIndicator] = useState(false);
 
   const hourglassRef = useRef(null);
@@ -272,6 +287,46 @@ const Group2 = ({ setPart }) => {
     }
   }, [state.isDone, setPart]);
 
+  useEffect(() => {
+    if (helpOverlay) {
+      let index;
+
+      setPreventHelp(true);
+
+      for (let i = 0; i < state.active.length; i++) {
+        if (
+          state.active[i] !== "correct" &&
+          balls[i].type.includes(state.boxList[state.subjectIndex].type)
+        ) {
+          index = i;
+          break;
+        }
+      }
+      const element = document.querySelectorAll(".ball")[index];
+
+      setHelpFingerPosition([
+        element.getBoundingClientRect().left +
+          element.getBoundingClientRect().width / 2 -
+          10,
+        element.getBoundingClientRect().top +
+          element.getBoundingClientRect().height / 2 -
+          10,
+      ]);
+
+      setTimeout(() => {
+        handleCheck(index);
+
+        setTimeout(() => {
+          setHelpFingerPosition("init");
+
+          setTimeout(() => {
+            setPreventHelp(false);
+          }, 2000);
+        }, 150);
+      }, 1250);
+    }
+  }, [helpOverlay]);
+
   return (
     <>
       <div className="balls">
@@ -313,6 +368,16 @@ const Group2 = ({ setPart }) => {
       )}
 
       <Indicator active={activeIndicator} />
+
+      <StatusBar
+        infoText={infoText}
+        infoOverlay={infoOverlay}
+        setInfoOverlay={setInfoOverlay}
+        setHelpOverlay={setHelpOverlay}
+        preventHelp={preventHelp}
+        helpFingerPosition={helpFingerPosition}
+        infoTitle={infoTitle}
+      />
     </>
   );
 };

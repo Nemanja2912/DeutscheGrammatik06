@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import Movable from "../reusable/movable/movable";
+import StatusBar from "../UI/StatusBar";
 
 const labels = ["Ich", "Wir", "Du", "Ihr", "Er/Sie/Es", "Sie"];
 
@@ -186,6 +187,13 @@ const Screen1 = ({ setIsDone, isDone, buttonLevel, step, setStep }) => {
 
   const [disableMove, setDisableMove] = useState(true);
 
+  const [helpOverlay, setHelpOverlay] = useState(false);
+  const [helpFingerPosition, setHelpFingerPosition] = useState("init");
+  const [preventHelp, setPreventHelp] = useState(true);
+  const [infoTitle, setInfoTitle] = useState();
+  const [infoText, setInfoText] = useState(<>Zieh die Paare in die Tabelle.</>);
+  const [infoOverlay, setInfoOverlay] = useState(true);
+
   const boxRefs = [
     useRef(null),
     useRef(null),
@@ -226,6 +234,83 @@ const Screen1 = ({ setIsDone, isDone, buttonLevel, step, setStep }) => {
     useRef(null),
   ];
 
+  useEffect(() => {
+    if (helpOverlay) {
+      const lineIndex = [...lineDoneIndex];
+      const isDoneList = [...isDone];
+
+      let index = -1;
+
+      for (let i = 0; i < isDone.length; i++) {
+        if (!isDone[i]) {
+          index = i;
+          break;
+        }
+      }
+
+      const timeout = 1250;
+
+      const element = wordRefs[index].current;
+
+      const elementX = element.getBoundingClientRect().left;
+      const elementY = element.getBoundingClientRect().top;
+
+      const styleX = parseFloat(element.style.left);
+      const styleY = parseFloat(element.style.top);
+
+      setHelpFingerPosition([
+        element.getBoundingClientRect().left +
+          element.getBoundingClientRect().width / 2 -
+          5,
+        element.getBoundingClientRect().top +
+          element.getBoundingClientRect().height / 2,
+      ]);
+
+      setTimeout(() => {
+        element.style.transition = `1000ms linear`;
+
+        element.style.background = "transparent";
+        element.classList.add("finish");
+
+        const targetRefX =
+          lineRefs[words[index].box][
+            lineIndex[words[index].box]
+          ]?.current?.getBoundingClientRect()?.right;
+
+        const targetRefY =
+          lineRefs[words[index].box][
+            lineIndex[words[index].box]
+          ]?.current?.getBoundingClientRect()?.top;
+
+        element.style.left =
+          targetRefX -
+          elementX +
+          styleX -
+          element.getBoundingClientRect()?.width +
+          "px";
+
+        element.style.top = targetRefY - elementY + styleY + "px";
+
+        setHelpFingerPosition([
+          targetRefX - element.getBoundingClientRect().width / 2 - 5,
+          targetRefY + element.getBoundingClientRect().height / 2,
+        ]);
+
+        lineIndex[words[index].box] += 1;
+        isDoneList[index] = true;
+
+        setTimeout(() => {
+          setHelpFingerPosition("init");
+        }, timeout);
+
+        setDisableMove(false);
+
+        setLineDoneIndex([...lineIndex]);
+        setIsDone([...isDoneList]);
+      }, timeout);
+    }
+  }, [helpOverlay]);
+
   const handleFinished = (index, boxIndex) => {
     const element = wordRefs[index].current;
 
@@ -264,15 +349,16 @@ const Screen1 = ({ setIsDone, isDone, buttonLevel, step, setStep }) => {
     const timer = 250;
 
     for (let i = 0; i < wordRefs.length; i++) {
-      const element = wordRefs[i].current;
-
-      const elementX = element.getBoundingClientRect().left;
-      const elementY = element.getBoundingClientRect().top;
-
-      const styleX = parseFloat(element.style.left);
-      const styleY = parseFloat(element.style.top);
+      const timeout = counter * timer;
 
       if (words[i].auto) {
+        const element = wordRefs[i].current;
+
+        const elementX = element.getBoundingClientRect().left;
+        const elementY = element.getBoundingClientRect().top;
+
+        const styleX = parseFloat(element.style.left);
+        const styleY = parseFloat(element.style.top);
         setTimeout(() => {
           element.style.transition = `${timer}ms linear`;
 
@@ -298,7 +384,7 @@ const Screen1 = ({ setIsDone, isDone, buttonLevel, step, setStep }) => {
 
           lineIndex[words[i].box] += 1;
           isDoneList[i] = true;
-        }, counter * timer);
+        }, timeout);
 
         counter++;
       }
@@ -309,10 +395,18 @@ const Screen1 = ({ setIsDone, isDone, buttonLevel, step, setStep }) => {
 
           setLineDoneIndex([...lineIndex]);
           setIsDone([...isDoneList]);
-        }, counter * timer);
+
+          setPreventHelp(false);
+        }, timeout);
       }
     }
   };
+
+  useEffect(() => {
+    if (buttonLevel === 1 && step === 0) {
+      setPreventHelp(true);
+    }
+  }, [buttonLevel, step]);
 
   return (
     <>
@@ -364,7 +458,6 @@ const Screen1 = ({ setIsDone, isDone, buttonLevel, step, setStep }) => {
           </div>
         ))}
       </div>
-
       {buttonLevel === 1 && step === 0 && (
         <div
           className="button-show"
@@ -377,6 +470,18 @@ const Screen1 = ({ setIsDone, isDone, buttonLevel, step, setStep }) => {
         >
           WEITER
         </div>
+      )}
+
+      {step === 0 && (
+        <StatusBar
+          infoText={infoText}
+          infoOverlay={infoOverlay}
+          setInfoOverlay={setInfoOverlay}
+          setHelpOverlay={setHelpOverlay}
+          preventHelp={preventHelp}
+          helpFingerPosition={helpFingerPosition}
+          infoTitle={infoTitle}
+        />
       )}
     </>
   );

@@ -9,44 +9,13 @@ import Box2 from "./box2";
 const Game3 = ({ nextLesson }) => {
   const [part, setPart] = useState(0);
 
-  const [helpOverlay, setHelpOverlay] = useState(false);
-  const [helpFingerPosition, setHelpFingerPosition] = useState("init");
-  const [preventHelp, setPreventHelp] = useState(false);
-  const [infoTitle, setInfoTitle] = useState();
-  const [infoText, setInfoText] = useState(
-    <>Zieh die Elemente und formuliere die Regel.</>
-  );
-  const [infoOverlay, setInfoOverlay] = useState(true);
-
   useEffect(() => {
     if (part === 1) {
       setTimeout(() => {
-        setInfoText(
-          <>
-            Was ist ein Verbstamm?
-            <br />
-            Zieh die Infinitive in die Lücken.
-          </>
-        );
-
         setPart(2);
-
-        setInfoOverlay(true);
       }, 500);
     }
   }, [part]);
-
-  const handleTask = () => {
-    setInfoText(
-      <>
-        Zieh die passende Endung
-        <br />
-        zum Verbstamm in die Lücke.
-      </>
-    );
-
-    setInfoOverlay(true);
-  };
 
   return (
     <>
@@ -61,7 +30,7 @@ const Game3 = ({ nextLesson }) => {
             width: 1000,
           }}
         >
-          <Box1 setNextPart={() => setPart(1)} />
+          <Box1 part={part} setNextPart={() => setPart(1)} />
         </div>
         <div
           style={{
@@ -72,7 +41,7 @@ const Game3 = ({ nextLesson }) => {
             transform: part > 3 ? "translateY(-140px)" : "translateY(0px)",
           }}
         >
-          <Screen2 setNextPart={() => setPart(3)} handleTask={handleTask} />
+          <Screen2 part={part} setNextPart={() => setPart(3)} />
         </div>
 
         <div
@@ -87,7 +56,7 @@ const Game3 = ({ nextLesson }) => {
             width: 1000,
           }}
         >
-          <Box2 hide={part <= 3} setNextPart={() => setPart(5)} />
+          <Box2 part={part} hide={part <= 3} setNextPart={() => setPart(5)} />
         </div>
       </div>
 
@@ -116,16 +85,6 @@ const Game3 = ({ nextLesson }) => {
           </div>
         </div>
       )}
-
-      <StatusBar
-        infoText={infoText}
-        infoOverlay={infoOverlay}
-        setInfoOverlay={setInfoOverlay}
-        setHelpOverlay={setHelpOverlay}
-        preventHelp={preventHelp}
-        helpFingerPosition={helpFingerPosition}
-        infoTitle={infoTitle}
-      />
     </>
   );
 };

@@ -66,19 +66,6 @@ const list = [
 const Game5 = () => {
   const [groupIndex, setGroupIndex] = useState(0);
 
-  const [helpOverlay, setHelpOverlay] = useState(false);
-  const [helpFingerPosition, setHelpFingerPosition] = useState("init");
-  const [preventHelp, setPreventHelp] = useState(false);
-  const [infoTitle, setInfoTitle] = useState();
-  const [infoText, setInfoText] = useState(
-    <>
-      Wie heißt das Präsens?
-      <br />
-      Schreib die richtige Form.
-    </>
-  );
-  const [infoOverlay, setInfoOverlay] = useState(true);
-
   return (
     <>
       <div className="game5">
@@ -87,6 +74,7 @@ const Game5 = () => {
             groupIndex >= index && (
               <Group
                 index={index}
+                last={index === list.length - 1}
                 key={index}
                 style={{
                   position: "absolute",
@@ -103,16 +91,6 @@ const Game5 = () => {
             )
         )}
       </div>
-
-      <StatusBar
-        infoText={infoText}
-        infoOverlay={infoOverlay}
-        setInfoOverlay={setInfoOverlay}
-        setHelpOverlay={setHelpOverlay}
-        preventHelp={preventHelp}
-        helpFingerPosition={helpFingerPosition}
-        infoTitle={infoTitle}
-      />
     </>
   );
 };

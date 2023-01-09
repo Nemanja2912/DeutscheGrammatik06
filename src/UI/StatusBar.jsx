@@ -2,6 +2,7 @@ import BarCircle from "./BarCircle";
 import InfoOverlay from "./InfoOverlay";
 import { useState } from "react";
 import HelpOverlay from "./HelpOverlay";
+import ReactDOM from "react-dom";
 
 const StatusBar = ({
   infoTitle = "Aufgabe",
@@ -18,12 +19,13 @@ const StatusBar = ({
     top: 80,
     display: "flex",
     gap: 5,
+    zIndex: 1000,
   };
 
   const [showInfo, setShowInfo] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
 
-  return (
+  return ReactDOM.createPortal(
     <>
       <div className="status-bar" style={barStyle}>
         <BarCircle
@@ -76,7 +78,8 @@ const StatusBar = ({
           }}
         />
       )}
-    </>
+    </>,
+    document.querySelector("#status-bar")
   );
 };
 

@@ -1,7 +1,20 @@
 import { useState } from "react";
 import GuessWord from "../UI/GuessWord";
 
-const Group = ({ item, setGroupIndex, groupIndex, index, style }) => {
+const Group = ({ item, setGroupIndex, groupIndex, index, style, last }) => {
+  const [helpOverlay, setHelpOverlay] = useState(false);
+  const [helpFingerPosition, setHelpFingerPosition] = useState("disable");
+  const [preventHelp, setPreventHelp] = useState(false);
+  const [infoTitle, setInfoTitle] = useState();
+  const [infoText, setInfoText] = useState(
+    <>
+      Wie heißt das Präsens?
+      <br />
+      Schreib die richtige Form.
+    </>
+  );
+  const [infoOverlay, setInfoOverlay] = useState(index === 0);
+
   const [disable, setDisable] = useState(false);
   const [keyboardStatus, setKeyboardStatus] = useState(false);
 
@@ -14,7 +27,21 @@ const Group = ({ item, setGroupIndex, groupIndex, index, style }) => {
   };
 
   const handleNext = () => {
-    setGroupIndex();
+    if (last) {
+      setInfoText(
+        <>
+          Das war die letzte Aufgabe.
+          <br /> Du kannst im Menü eine andere Aufgabe auswählen und sie
+          wiederholen.
+        </>
+      );
+
+      setInfoTitle("ENDE");
+
+      setInfoOverlay(true);
+    } else {
+      setGroupIndex();
+    }
   };
 
   return (
@@ -47,12 +74,19 @@ const Group = ({ item, setGroupIndex, groupIndex, index, style }) => {
             >
               <GuessWord
                 word={item?.guess}
-                // getWordBack={getWordBack}
                 returnKeyboardStatus={returnKeyboardStatus}
                 keyboardStatus={keyboardStatus}
                 success={handleSuccess}
                 disable={disable}
                 customDisable={false}
+                infoText={infoText}
+                infoOverlay={infoOverlay}
+                setInfoOverlay={setInfoOverlay}
+                helpOverlay={helpOverlay}
+                setHelpOverlay={setHelpOverlay}
+                preventHelp={preventHelp}
+                helpFingerPosition={helpFingerPosition}
+                infoTitle={infoTitle}
               />
             </div>
             <p>{item?.text[1]}</p>
@@ -74,7 +108,7 @@ const Group = ({ item, setGroupIndex, groupIndex, index, style }) => {
             style={{ margin: "auto", left: 0, right: 0 }}
             onClick={handleNext}
           >
-            WEITER
+            {last ? "ENDE" : "WEITER"}
           </div>
         </div>
       )}

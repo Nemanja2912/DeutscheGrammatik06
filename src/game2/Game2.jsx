@@ -16,14 +16,6 @@ const Game2 = ({ nextLesson }) => {
   const [buttonLevel, setButtonLevel] = useState(0);
   const [step, setStep] = useState(0);
   const [isDone, setIsDone] = useState([...finishList]);
-
-  const [helpOverlay, setHelpOverlay] = useState(false);
-  const [helpFingerPosition, setHelpFingerPosition] = useState("init");
-  const [preventHelp, setPreventHelp] = useState(false);
-  const [infoTitle, setInfoTitle] = useState();
-  const [infoText, setInfoText] = useState(<>Zieh die Paare in die Tabelle.</>);
-  const [infoOverlay, setInfoOverlay] = useState(false);
-
   const [endButton, setEndButton] = useState(false);
 
   useEffect(() => {
@@ -40,23 +32,6 @@ const Game2 = ({ nextLesson }) => {
       setButtonLevel(1);
     }
   }, [isDone]);
-
-  useEffect(() => {
-    if (step === 1) {
-      setTimeout(() => {
-        setInfoText(
-          <>
-            Wie bildet man das Präsens?
-            <br />
-            Zieh den Infinitiv in die Lücke zwischen <br />
-            dem Pronomen und der Endung.
-          </>
-        );
-
-        setInfoOverlay(true);
-      }, 500);
-    }
-  }, [step]);
 
   return (
     <>
@@ -105,7 +80,7 @@ const Game2 = ({ nextLesson }) => {
             right: 0,
           }}
         >
-          <Screen3 setEndButton={setEndButton} />
+          <Screen3 step={step} setEndButton={setEndButton} />
         </div>
       </div>
 
@@ -128,16 +103,6 @@ const Game2 = ({ nextLesson }) => {
           </div>
         </div>
       )}
-
-      <StatusBar
-        infoText={infoText}
-        infoOverlay={infoOverlay}
-        setInfoOverlay={setInfoOverlay}
-        setHelpOverlay={setHelpOverlay}
-        preventHelp={preventHelp}
-        helpFingerPosition={helpFingerPosition}
-        infoTitle={infoTitle}
-      />
     </>
   );
 };

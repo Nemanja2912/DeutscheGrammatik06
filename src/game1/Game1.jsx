@@ -68,7 +68,7 @@ const rest2 = [
     following: [[1, 5], []],
   },
   {
-    line: [["Karte :-)"]],
+    line: [["Karte", ":-)"]],
     following: [[0]],
     element: [[]],
     disabled: true,
@@ -281,13 +281,27 @@ const Game1 = ({ nextLesson }) => {
   };
 
   const handleFinish = () => {
+    if (messageList[step + 1]?.disabled) {
+      setPreventHelp(true);
+
+      setTimeout(() => {
+        setPreventHelp(false);
+      }, 2000);
+    }
+
     if (lineIndex > 7 && !messageList[step]?.disabled && !finish) {
+      setPreventHelp(true);
+
       setTimeout(() => {
         setLineTranslate((prev) => {
           const result = prev - 30;
 
           return result;
         });
+
+        setTimeout(() => {
+          setPreventHelp(false);
+        }, 1000);
       }, 1500);
     }
 
@@ -302,6 +316,195 @@ const Game1 = ({ nextLesson }) => {
     }
   };
 
+  useEffect(() => {
+    if (messageList[step]?.disabled) return;
+
+    if (helpOverlay) {
+      if (buttonLevel) {
+        const optionsList = Array.from(document.querySelectorAll(".options"));
+        const button = optionsList[buttonLevel - 1]?.children[0];
+
+        setHelpFingerPosition([
+          button?.getBoundingClientRect().left +
+            button?.getBoundingClientRect().width / 2 -
+            5,
+          button?.getBoundingClientRect().top +
+            button?.getBoundingClientRect().height / 2 -
+            5,
+        ]);
+
+        setTimeout(() => {
+          button?.click();
+
+          setTimeout(() => {
+            setHelpFingerPosition("init");
+          }, 500);
+        }, 1250);
+
+        return;
+      }
+
+      const boxLine = lineRefs.current[lineIndex].current;
+
+      const messageBox = document.querySelectorAll(".line")[step];
+
+      let element = null,
+        followElement;
+
+      const elementArr = messageList[step].element;
+
+      let isDone = false;
+
+      for (let i = 0; i < elementArr.length; i++) {
+        const elementList = elementArr[i];
+
+        for (let j = 0; j < elementList.length; j++) {
+          const tempElement =
+            messageBox.children[0].children[1].children[1].children[i].children[
+              elementList[j]
+            ];
+
+          if (parseFloat(tempElement.style.left) === 0) {
+            isDone = false;
+          }
+
+          if (parseFloat(tempElement.style.left) === 0 && element === null) {
+            element = tempElement;
+
+            followElement =
+              messageBox.children[0].children[1].children[1].children[i]
+                .children[messageList[step].following[i][j]];
+
+            isDone = true;
+          }
+        }
+      }
+
+      setHelpFingerPosition([
+        element.getBoundingClientRect().left +
+          element.getBoundingClientRect().width / 2 -
+          10,
+        element.getBoundingClientRect().top +
+          element.getBoundingClientRect().height / 2,
+      ]);
+
+      setTimeout(() => {
+        const elementX = element.getBoundingClientRect().left;
+        const elementY = element.getBoundingClientRect().top;
+
+        element.children[0].style.opacity = 1;
+        element.style.transition = "1s linear";
+
+        element.style.left =
+          boxLine.getBoundingClientRect().left + 50 - elementX + "px";
+
+        element.style.top =
+          boxLine.getBoundingClientRect().top - elementY + "px";
+
+        const followElementX = followElement.getBoundingClientRect().left;
+        const followElementY = followElement.getBoundingClientRect().top;
+
+        followElement.children[0].style.opacity = 1;
+        followElement.style.transition = "1s linear";
+
+        followElement.style.left =
+          boxLine.getBoundingClientRect().left +
+          (followElementX - elementX) -
+          followElementX +
+          50 +
+          "px";
+
+        followElement.style.top =
+          boxLine.getBoundingClientRect().top - followElementY + "px";
+
+        setHelpFingerPosition([
+          boxLine.getBoundingClientRect().left +
+            element.getBoundingClientRect().width / 2 +
+            40,
+          boxLine.getBoundingClientRect().top +
+            element.getBoundingClientRect().height / 2,
+        ]);
+
+        setTimeout(() => {
+          const followElementX = followElement.getBoundingClientRect().left;
+          const followElementY = followElement.getBoundingClientRect().top;
+
+          const followingStyleX = parseFloat(followElement.style.left);
+          const followingStyleY = parseFloat(followElement.style.top);
+
+          const elementX = element.getBoundingClientRect().left;
+          const elementY = element.getBoundingClientRect().top;
+
+          const elementStyleX = parseFloat(followElement.style.left);
+          const elementStyleY = parseFloat(followElement.style.top);
+
+          element.style.opacity = 0;
+          element.style.transition =
+            "all 0.5s linear, opacity 0.5s linear, background-color 0s";
+          element.style.pointerEvents = "none";
+
+          element.style.zIndex = "1";
+
+          followElement.style.transition = "0.5s linear";
+          followElement.style.pointerEvents = "none";
+
+          followElement.style.left =
+            boxLine.getBoundingClientRect().left -
+            followElementX +
+            followingStyleX +
+            "px";
+
+          followElement.style.top =
+            boxLine.getBoundingClientRect().top -
+            followElementY +
+            followingStyleY +
+            "px";
+
+          element.style.left =
+            boxLine.getBoundingClientRect().left -
+            elementX +
+            followElement.getBoundingClientRect().width +
+            elementStyleX +
+            "px";
+
+          element.style.top =
+            boxLine.getBoundingClientRect().top -
+            elementY +
+            elementStyleY +
+            "px";
+
+          const child = document.createElement("p");
+          child.innerHTML = followElement.innerHTML + " " + element.innerHTML;
+
+          followElement.style.opacity = 0;
+          element.style.opacity = 0;
+
+          if (!child.innerHTML.includes("Sebastian")) {
+            child.style.textTransform = "lowercase";
+          }
+
+          setTimeout(() => {
+            child.style.opacity = 1;
+          }, 0);
+
+          boxLine.appendChild(child);
+
+          setTimeout(() => {
+            if (isDone) {
+              handleFinish();
+            } else {
+              handleComplete();
+            }
+
+            setTimeout(() => {
+              setHelpFingerPosition("init");
+            }, 1250);
+          }, 100);
+        }, 1250);
+      }, 1250);
+    }
+  }, [helpOverlay]);
+
   return (
     <>
       <div className="game1">
@@ -315,6 +518,7 @@ const Game1 = ({ nextLesson }) => {
         >
           {messageList.map((item, index) => (
             <div
+              className="line"
               key={index}
               style={{
                 opacity:

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Keyboard from "./Keyboard";
 import DetailsBox from "./DetailsBox";
+import StatusBar from "./StatusBar";
 
 const GuessWord = ({
   word = "",
@@ -14,6 +15,15 @@ const GuessWord = ({
   success = () => {},
   getWordBack = () => {},
   returnKeyboardStatus = () => {},
+
+  infoText,
+  infoOverlay,
+  setInfoOverlay,
+  helpOverlay,
+  setHelpOverlay,
+  preventHelp,
+  helpFingerPosition,
+  infoTitle,
 }) => {
   const [guessWordHolder, setGuessWordHolder] = useState([]);
   const [blinkPosition, setBlinkPosition] = useState(0);
@@ -191,49 +201,86 @@ const GuessWord = ({
     }
   }, [customWord]);
 
+  useEffect(() => {
+    if (helpOverlay) {
+      const correctWord = word.split("");
+
+      for (let i = 0; i < guessWordHolder.length; i++) {
+        if (correctWord[i] !== guessWordHolder[i]) {
+          setGuessWordHolder((prev) => {
+            prev[i] = correctWord[i];
+
+            return [...prev];
+          });
+
+          setBlinkPosition((prev) => {
+            if (i === guessWordHolder.length - 1) {
+              return 0;
+            }
+            return i + 1;
+          });
+
+          break;
+        }
+      }
+    }
+  }, [helpOverlay]);
+
   return (
-    <div className="guess-screen">
-      <div className="guess-word" style={guessWordStyle}>
-        {guessWordHolder.map((letter, letterIndex) => {
-          return (
-            <p
-              key={letterIndex}
-              letter={letter + letterIndex}
-              className="blank"
+    <>
+      <div className="guess-screen">
+        <div className="guess-word" style={guessWordStyle}>
+          {guessWordHolder.map((letter, letterIndex) => {
+            return (
+              <p
+                key={letterIndex}
+                letter={letter + letterIndex}
+                className="blank"
+                style={{
+                  ...blankStyle,
+                  backgroundColor: falseLetters[letterIndex] && "#EB6400",
+                }}
+              >
+                {letter}
+              </p>
+            );
+          })}
+          {tipp && (
+            <div
+              className="detail-wrapper"
               style={{
-                ...blankStyle,
-                backgroundColor: falseLetters[letterIndex] && "#EB6400",
+                position: "absolute",
+                top: 0,
+                transform: "translateY(-125%)",
+                opacity: showTipp ? 1 : 0,
+                transition: ".25s linear",
+                pointerEvents: "none",
               }}
             >
-              {letter}
-            </p>
-          );
-        })}
-        {tipp && (
-          <div
-            className="detail-wrapper"
-            style={{
-              position: "absolute",
-              top: 0,
-              transform: "translateY(-125%)",
-              opacity: showTipp ? 1 : 0,
-              transition: ".25s linear",
-              pointerEvents: "none",
-            }}
-          >
-            <DetailsBox backgroundColor="#EB6400">{msg}</DetailsBox>
-          </div>
-        )}
-        {!disable && <div className="blink-box" style={blinkBoxStyle}></div>}
+              <DetailsBox backgroundColor="#EB6400">{msg}</DetailsBox>
+            </div>
+          )}
+          {!disable && <div className="blink-box" style={blinkBoxStyle}></div>}
+        </div>
+
+        <Keyboard
+          returnLetter={returnLetter}
+          disable={(keyboard && disable) || customDisable}
+          returnStatus={returnKeyboardStatus}
+          keyboardStatus={keyboardStatus}
+        />
       </div>
 
-      <Keyboard
-        returnLetter={returnLetter}
-        disable={(keyboard && disable) || customDisable}
-        returnStatus={returnKeyboardStatus}
-        keyboardStatus={keyboardStatus}
+      <StatusBar
+        infoText={infoText}
+        infoOverlay={infoOverlay}
+        setInfoOverlay={setInfoOverlay}
+        setHelpOverlay={setHelpOverlay}
+        preventHelp={preventHelp}
+        helpFingerPosition={helpFingerPosition}
+        infoTitle={infoTitle}
       />
-    </div>
+    </>
   );
 };
 

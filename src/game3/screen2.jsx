@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import MovableEdited from "./../game2/movable/movableEdited";
 import Movable from "./../reusable/movable/movable";
+import StatusBar from "./../UI/StatusBar";
+import moveFunc from "./../reusable/movable/moveFunc";
 
 const labels = ["Ich", "Wir", "Du", "Ihr", "Er/Sie/Es", "Sie"];
 
@@ -44,7 +46,20 @@ const lastPart = [
   },
 ];
 
-const Screen2 = ({ setNextPart, handleTask }) => {
+const Screen2 = ({ part, setNextPart }) => {
+  const [helpOverlay, setHelpOverlay] = useState(false);
+  const [helpFingerPosition, setHelpFingerPosition] = useState("init");
+  const [preventHelp, setPreventHelp] = useState(false);
+  const [infoTitle, setInfoTitle] = useState();
+  const [infoText, setInfoText] = useState(
+    <>
+      Was ist ein Verbstamm?
+      <br />
+      Zieh die Infinitive in die Lücken.
+    </>
+  );
+  const [infoOverlay, setInfoOverlay] = useState(true);
+
   const [isDone, setIsDone] = useState([
     [false, false, false, false, false],
     [false, false, false, false, false],
@@ -83,10 +98,7 @@ const Screen2 = ({ setNextPart, handleTask }) => {
 
   const [boxLevel, setBoxLevel] = useState(0);
 
-  const [wordDone, setWordDone] = useState([
-    [false, false, false],
-    [false, false, false],
-  ]);
+  const [wordDone, setWordDone] = useState([false, false]);
 
   const labelRef = [
     useRef(null),
@@ -128,7 +140,8 @@ const Screen2 = ({ setNextPart, handleTask }) => {
       lineRefs[lineIndex].current.children[index].style.zIndex = 9;
   };
 
-  const handleFinish = (event, element, elementIndex, lineIndex) => {
+  const handleFinish = (event, element, elementIndex, autoBoxIndex) => {
+    setPreventHelp(true);
     let index = -1;
     setDisable(true);
 
@@ -136,11 +149,12 @@ const Screen2 = ({ setNextPart, handleTask }) => {
       //   if (isDone[elementIndex][i] === true) continue;
 
       if (
-        boxRefs[i].current &&
-        event.clientX > boxRefs[i].current.getBoundingClientRect().left &&
-        event.clientX < boxRefs[i].current.getBoundingClientRect().right &&
-        event.clientY > boxRefs[i].current.getBoundingClientRect().top &&
-        event.clientY < boxRefs[i].current.getBoundingClientRect().bottom
+        (boxRefs[i].current &&
+          event.clientX > boxRefs[i].current.getBoundingClientRect().left &&
+          event.clientX < boxRefs[i].current.getBoundingClientRect().right &&
+          event.clientY > boxRefs[i].current.getBoundingClientRect().top &&
+          event.clientY < boxRefs[i].current.getBoundingClientRect().bottom) ||
+        autoBoxIndex === i
       ) {
         index = i;
 
@@ -168,6 +182,8 @@ const Screen2 = ({ setNextPart, handleTask }) => {
 
         element.children[1].style.top = -20 + "px";
         element.children[1].style.opacity = 0;
+
+        console.log(dropRefs, index);
 
         dropRefs[index].current.style.opacity = 0;
 
@@ -261,6 +277,8 @@ const Screen2 = ({ setNextPart, handleTask }) => {
 
               setTimeout(() => {
                 setDisable(false);
+
+                setPreventHelp(false);
               }, 500);
             }, 500);
           }, 750);
@@ -269,14 +287,15 @@ const Screen2 = ({ setNextPart, handleTask }) => {
     }, 500);
   };
 
-  const handleDropFinished = (event, element, index) => {
+  const handleDropFinished = (event, element, index, autoBoxIndex) => {
     for (let i = 0; i < boxRefs.length; i++) {
       if (
-        boxRefs[i].current &&
-        event.clientX > boxRefs[i].current.getBoundingClientRect().left &&
-        event.clientX < boxRefs[i].current.getBoundingClientRect().right &&
-        event.clientY > boxRefs[i].current.getBoundingClientRect().top &&
-        event.clientY < boxRefs[i].current.getBoundingClientRect().bottom
+        (boxRefs[i].current &&
+          event.clientX > boxRefs[i].current.getBoundingClientRect().left &&
+          event.clientX < boxRefs[i].current.getBoundingClientRect().right &&
+          event.clientY > boxRefs[i].current.getBoundingClientRect().top &&
+          event.clientY < boxRefs[i].current.getBoundingClientRect().bottom) ||
+        autoBoxIndex === i
       ) {
         setIsDropDone((prev) => {
           let list = [...prev];
@@ -289,6 +308,7 @@ const Screen2 = ({ setNextPart, handleTask }) => {
       }
     }
 
+    setPreventHelp(false);
     setBoxDisable((prev) => {
       let list = [...prev];
       list[index] = true;
@@ -355,9 +375,134 @@ const Screen2 = ({ setNextPart, handleTask }) => {
     }
 
     if (finish) {
+      setPreventHelp(true);
       setNextPart();
     }
   }, [isDropDone]);
+
+  const handleTask = () => {
+    setInfoText(
+      <>
+        Zieh die passende Endung
+        <br />
+        zum Verbstamm in die Lücke.
+      </>
+    );
+
+    setInfoOverlay(true);
+  };
+
+  useEffect(() => {
+    if (helpOverlay) {
+      if (!part2) {
+        const elementIndex = wordDone[0] ? 1 : 0;
+
+        const element = document.querySelectorAll(".move-word")[elementIndex];
+
+        setPreventHelp(true);
+
+        setHelpFingerPosition([
+          element.getBoundingClientRect().left +
+            element.getBoundingClientRect().width / 2,
+          element.getBoundingClientRect().top +
+            element.getBoundingClientRect().height / 2,
+        ]);
+
+        setTimeout(() => {
+          let dropX;
+
+          dropX =
+            dropRefs[0]?.current?.getBoundingClientRect()?.right -
+            7.5 -
+            element.children[0].getBoundingClientRect()?.width;
+
+          const dropY =
+            dropRefs[0]?.current?.getBoundingClientRect()?.top -
+            element.getBoundingClientRect().height;
+
+          element.style.transition = "1000ms linear";
+
+          element.style.left =
+            dropX - element.getBoundingClientRect().left + "px";
+
+          element.style.top =
+            dropY - element.getBoundingClientRect().top + "px";
+
+          setHelpFingerPosition([
+            dropX + element.getBoundingClientRect().width / 2,
+            dropY + element.getBoundingClientRect().height / 2,
+          ]);
+
+          setTimeout(() => {
+            handleFinish(true, element, elementIndex, 0);
+
+            setHelpFingerPosition("init");
+
+            setWordDone((prev) => {
+              prev[elementIndex] = true;
+
+              return [...prev];
+            });
+          }, 1250);
+        }, 1250);
+      } else {
+        let elementIndex, boxIndex;
+
+        for (let i = 0; i < boxDisable.length; i++) {
+          if (!boxDisable[i]) {
+            elementIndex = i;
+            break;
+          }
+        }
+
+        for (let i = 0; i < isDropDone.length; i++) {
+          if (lastPart[elementIndex].box.includes(i)) {
+            if (!isDropDone[i]) {
+              boxIndex = i;
+
+              break;
+            }
+          }
+        }
+
+        const element = document.querySelectorAll(".move-suffix")[elementIndex];
+
+        setPreventHelp(true);
+
+        setHelpFingerPosition([
+          element.getBoundingClientRect().left +
+            element.getBoundingClientRect().width / 2 -
+            10,
+          element.getBoundingClientRect().top +
+            element.getBoundingClientRect().height / 2,
+        ]);
+
+        setTimeout(() => {
+          moveFunc(element, blankRefs[boxIndex].current, 1000);
+
+          setHelpFingerPosition([
+            blankRefs[boxIndex].current.getBoundingClientRect().left +
+              element.getBoundingClientRect().width / 2 -
+              10,
+            blankRefs[boxIndex].current.getBoundingClientRect().top +
+              element.getBoundingClientRect().height / 2,
+          ]);
+
+          setTimeout(() => {
+            handleDropFinished(true, element, elementIndex, boxIndex);
+
+            element.style.transition = "0s";
+
+            setHelpFingerPosition("init");
+            setWordDone((prev) => {
+              prev[elementIndex] = true;
+              return [...prev];
+            });
+          }, 1250);
+        }, 1250);
+      }
+    }
+  }, [helpOverlay]);
 
   return (
     <>
@@ -381,6 +526,7 @@ const Screen2 = ({ setNextPart, handleTask }) => {
 
             return (
               <MovableEdited
+                className="move-suffix"
                 style={{
                   pointerEvents:
                     boxDisable[index] || !part2 ? "none" : "initial",
@@ -404,9 +550,10 @@ const Screen2 = ({ setNextPart, handleTask }) => {
           <div className="line1" ref={lineRefs[0]}>
             {words.map((word, index) => (
               <MovableEdited
+                className="move-word"
                 key={index}
                 style={{
-                  pointerEvents: wordDone[0][index] || disable ? "none" : "",
+                  pointerEvents: wordDone[index] || disable ? "none" : "",
                 }}
                 onMove={(x, y, element, event) => handleMove(element, event)}
                 onFail={(element) => handleFail(element, index, 1)}
@@ -414,11 +561,11 @@ const Screen2 = ({ setNextPart, handleTask }) => {
                 multipleCustomDrop={dropRefs}
                 multipleRefsDisabled={isDone[index]}
                 onFinished={(event, element) => {
-                  handleFinish(event, element, index, 0);
+                  handleFinish(event, element, index);
 
                   setWordDone((prev) => {
                     let list = [...prev];
-                    list[0][index] = true;
+                    list[index] = true;
 
                     return [...list];
                   });
@@ -456,6 +603,18 @@ const Screen2 = ({ setNextPart, handleTask }) => {
       </div>
 
       <div id="clone"></div>
+
+      {part > 1 && part <= 3 && (
+        <StatusBar
+          infoText={infoText}
+          infoOverlay={infoOverlay}
+          setInfoOverlay={setInfoOverlay}
+          setHelpOverlay={setHelpOverlay}
+          preventHelp={preventHelp}
+          helpFingerPosition={helpFingerPosition}
+          infoTitle={infoTitle}
+        />
+      )}
     </>
   );
 };

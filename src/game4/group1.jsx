@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, createRef } from "react";
 
 import Ball from "./../UI/Ball";
+import StatusBar from "../UI/StatusBar";
 
 const balls = [
   {
@@ -136,6 +137,18 @@ const Group1 = ({ setPart }) => {
   const [subjectIndex, setSubjectIndex] = useState(0);
   const [boxList, setBoxList] = useState([...subject]);
 
+  const [helpOverlay, setHelpOverlay] = useState(false);
+  const [helpFingerPosition, setHelpFingerPosition] = useState("init");
+  const [preventHelp, setPreventHelp] = useState(false);
+  const [infoTitle, setInfoTitle] = useState();
+  const [infoText, setInfoText] = useState(
+    <>
+      Welche Verbformen passen zum Wort unten? <br />
+      Klicke die Verben an.
+    </>
+  );
+  const [infoOverlay, setInfoOverlay] = useState(true);
+
   useEffect(() => {
     let isActive = false;
 
@@ -248,6 +261,8 @@ const Group1 = ({ setPart }) => {
 
               setTimeout(() => {
                 setDisable(false);
+
+                setPreventHelp(false);
               }, 500);
             }, 500);
           }, 10);
@@ -255,6 +270,71 @@ const Group1 = ({ setPart }) => {
       }, 1000);
     }, 500);
   };
+
+  useEffect(() => {
+    if (helpOverlay) {
+      let isCheck = false;
+      let index;
+
+      setPreventHelp(true);
+
+      for (let i = 0; i < active.length; i++) {
+        if (active[i] === "active") {
+          isCheck = true;
+          index = i;
+          break;
+        }
+      }
+
+      if (isCheck) {
+        const button = document.querySelector(".button-show");
+
+        setHelpFingerPosition([
+          button.getBoundingClientRect().left +
+            button.getBoundingClientRect().width / 2 -
+            10,
+          button.getBoundingClientRect().top +
+            button.getBoundingClientRect().height / 2 -
+            10,
+        ]);
+
+        setTimeout(() => {
+          handleCheck();
+
+          setHelpFingerPosition("init");
+        }, 1250);
+      } else {
+        for (let i = 0; i < active.length; i++) {
+          if (
+            active[i] === "neutral" &&
+            balls[i].type.includes(boxList[subjectIndex].type)
+          ) {
+            index = i;
+            break;
+          }
+        }
+        const element = document.querySelectorAll(".ball")[index];
+
+        setHelpFingerPosition([
+          element.getBoundingClientRect().left +
+            element.getBoundingClientRect().width / 2 -
+            10,
+          element.getBoundingClientRect().top +
+            element.getBoundingClientRect().height / 2 -
+            10,
+        ]);
+
+        setTimeout(() => {
+          handleClickBall(index);
+
+          setTimeout(() => {
+            setHelpFingerPosition("init");
+            setPreventHelp(false);
+          }, 150);
+        }, 1250);
+      }
+    }
+  }, [helpOverlay, subjectIndex]);
 
   return (
     <>
@@ -284,7 +364,6 @@ const Group1 = ({ setPart }) => {
           );
         })}
       </div>
-
       {boxList.length > 0 && (
         <div
           className="box"
@@ -301,7 +380,6 @@ const Group1 = ({ setPart }) => {
           {boxList[subjectIndex]?.word}
         </div>
       )}
-
       {checkButton && (
         <div
           className="wrapper"
@@ -321,6 +399,15 @@ const Group1 = ({ setPart }) => {
           </div>
         </div>
       )}
+      <StatusBar
+        infoText={infoText}
+        infoOverlay={infoOverlay}
+        setInfoOverlay={setInfoOverlay}
+        setHelpOverlay={setHelpOverlay}
+        preventHelp={preventHelp}
+        helpFingerPosition={helpFingerPosition}
+        infoTitle={infoTitle}
+      />
     </>
   );
 };

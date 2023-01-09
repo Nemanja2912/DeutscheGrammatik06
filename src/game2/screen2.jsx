@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import MovableEdited from "./movable/movableEdited";
+import StatusBar from "../UI/StatusBar";
 
 const labels = ["Ich", "Wir", "Du", "Ihr", "Er/Sie/Es", "Sie"];
 
@@ -20,7 +21,7 @@ const words = [
   </>,
 ];
 
-const Screen2 = ({ buttonLevel, step, setStep }) => {
+const Screen2 = ({ step, setStep }) => {
   const [isDone, setIsDone] = useState([
     false,
     false,
@@ -30,6 +31,19 @@ const Screen2 = ({ buttonLevel, step, setStep }) => {
     false,
   ]);
   const [disable, setDisable] = useState(false);
+
+  const [helpOverlay, setHelpOverlay] = useState(false);
+  const [helpFingerPosition, setHelpFingerPosition] = useState("init");
+  const [preventHelp, setPreventHelp] = useState(false);
+  const [infoTitle, setInfoTitle] = useState();
+  const [infoText, setInfoText] = useState(
+    <>
+      Wie bildet man das Präsens? <br />
+      Zieh den Infinitiv in die Lücke zwischen <br />
+      dem Pronomen und der Endung.{" "}
+    </>
+  );
+  const [infoOverlay, setInfoOverlay] = useState(true);
 
   const [showButton, setShowButton] = useState(false);
 
@@ -81,6 +95,10 @@ const Screen2 = ({ buttonLevel, step, setStep }) => {
     if (finish) {
       setTimeout(() => {
         setShowButton(true);
+
+        setTimeout(() => {
+          setPreventHelp(true);
+        }, 2000);
       }, 500);
     }
   }, [isDone]);
@@ -96,18 +114,21 @@ const Screen2 = ({ buttonLevel, step, setStep }) => {
     lineRefs[lineIndex].current.children[index].style.zIndex = 9;
   };
 
-  const handleFinish = (event, element, elementIndex) => {
+  const handleFinish = (event, element, elementIndex, boxIndex) => {
     let index = -1;
     setDisable(true);
+
+    setPreventHelp(true);
 
     for (let i = 0; i < boxRefs.length; i++) {
       if (isDone[i] === true) continue;
 
       if (
-        event.clientX > boxRefs[i].current.getBoundingClientRect().left &&
-        event.clientX < boxRefs[i].current.getBoundingClientRect().right &&
-        event.clientY > boxRefs[i].current.getBoundingClientRect().top &&
-        event.clientY < boxRefs[i].current.getBoundingClientRect().bottom
+        (event.clientX > boxRefs[i].current.getBoundingClientRect().left &&
+          event.clientX < boxRefs[i].current.getBoundingClientRect().right &&
+          event.clientY > boxRefs[i].current.getBoundingClientRect().top &&
+          event.clientY < boxRefs[i].current.getBoundingClientRect().bottom) ||
+        i === boxIndex
       ) {
         index = i;
         setIsDone((prev) => {
@@ -185,8 +206,6 @@ const Screen2 = ({ buttonLevel, step, setStep }) => {
           p.style.top =
             element.children[0].getBoundingClientRect().top - pY + "px";
 
-          console.log(element.children[0].getBoundingClientRect().right, pY);
-
           insert = true;
 
           timer2 = 1000;
@@ -195,6 +214,8 @@ const Screen2 = ({ buttonLevel, step, setStep }) => {
         setTimeout(() => {
           setTimeout(() => {
             setDisable(false);
+
+            setPreventHelp(false);
           }, 250);
 
           if (insert) {
@@ -215,6 +236,79 @@ const Screen2 = ({ buttonLevel, step, setStep }) => {
     }, 500);
   };
 
+  useEffect(() => {
+    if (helpOverlay) {
+      let elementIndex = -1;
+      let boxIndex = -1;
+
+      loop1: for (let i = 0; i < wordDone.length; i++) {
+        for (let j = 0; j < wordDone[i].length; j++) {
+          elementIndex++;
+
+          if (!wordDone[i][j]) {
+            setWordDone((prev) => {
+              prev[i][j] = true;
+
+              return [...prev];
+            });
+            break loop1;
+          }
+        }
+      }
+
+      for (let i = 0; i < isDone.length; i++) {
+        if (!isDone[i]) {
+          boxIndex = i;
+          break;
+        }
+      }
+
+      if (elementIndex === -1 || boxIndex === -1) return;
+
+      const element = document.querySelectorAll(".element-move")[elementIndex];
+
+      setHelpFingerPosition([
+        element.getBoundingClientRect().left +
+          element.getBoundingClientRect().width / 2 -
+          5,
+        element.getBoundingClientRect().top +
+          element.getBoundingClientRect().height / 2,
+      ]);
+
+      setTimeout(() => {
+        const dropX =
+          dropRefs[boxIndex]?.current?.getBoundingClientRect()?.right -
+          7.5 -
+          element.children[0].getBoundingClientRect()?.width;
+
+        let top = element.getBoundingClientRect().height;
+
+        const dropY =
+          dropRefs[boxIndex]?.current?.getBoundingClientRect()?.top - top;
+
+        element.style.transition = "1s linear";
+
+        element.style.left =
+          dropX - element.getBoundingClientRect().left + "px";
+
+        element.style.top = dropY - element.getBoundingClientRect().top + "px";
+
+        setHelpFingerPosition([
+          dropX + element.getBoundingClientRect().width / 2 - 5,
+          dropY + element.getBoundingClientRect().height / 2,
+        ]);
+
+        setTimeout(() => {
+          element.style.transition = "0s linear";
+
+          setHelpFingerPosition("init");
+
+          handleFinish(true, element, elementIndex, boxIndex);
+        }, 1250);
+      }, 1250);
+    }
+  }, [helpOverlay]);
+
   return (
     <>
       <div className="screen2">
@@ -222,6 +316,7 @@ const Screen2 = ({ buttonLevel, step, setStep }) => {
           <div className="line1" ref={lineRefs[0]}>
             {words.map((word, index) => (
               <MovableEdited
+                className="element-move"
                 key={index}
                 style={{
                   pointerEvents: wordDone[0][index] || disable ? "none" : "",
@@ -250,6 +345,7 @@ const Screen2 = ({ buttonLevel, step, setStep }) => {
           <div className="line2" ref={lineRefs[1]}>
             {words.map((word, index) => (
               <MovableEdited
+                className="element-move"
                 key={index}
                 style={{
                   pointerEvents: wordDone[1][index] || disable ? "none" : "",
@@ -313,6 +409,18 @@ const Screen2 = ({ buttonLevel, step, setStep }) => {
         >
           WEITER
         </div>
+      )}
+
+      {step === 1 && (
+        <StatusBar
+          infoText={infoText}
+          infoOverlay={infoOverlay}
+          setInfoOverlay={setInfoOverlay}
+          setHelpOverlay={setHelpOverlay}
+          preventHelp={preventHelp}
+          helpFingerPosition={helpFingerPosition}
+          infoTitle={infoTitle}
+        />
       )}
     </>
   );
