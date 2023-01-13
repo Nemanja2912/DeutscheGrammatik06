@@ -5,6 +5,7 @@ const moveFunc = (element, target, transition) => {
   const styleX = parseFloat(element.style.left);
   const styleY = parseFloat(element.style.top);
 
+  element.style.zIndex = 100;
   element.style.transition = `${transition}ms linear`;
 
   element.style.left =
@@ -12,6 +13,10 @@ const moveFunc = (element, target, transition) => {
 
   element.style.top =
     target.getBoundingClientRect().top - elementY - styleY + "px";
+
+  setTimeout(() => {
+    element.style.zIndex = 1;
+  }, transition);
 };
 
 export default moveFunc;

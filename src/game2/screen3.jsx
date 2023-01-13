@@ -30,7 +30,7 @@ const finishWord = [
   </>,
   <>
     <span>
-      l<span>ie</span>
+      l<span>ie</span>s
     </span>
     <span>en</span>
   </>,

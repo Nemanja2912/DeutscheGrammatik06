@@ -188,6 +188,8 @@ function reducer(state, action) {
 const Group2 = ({ setPart }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [firstTime, setFirstTime] = useState(true);
+
   const [helpOverlay, setHelpOverlay] = useState(false);
   const [helpFingerPosition, setHelpFingerPosition] = useState("init");
   const [preventHelp, setPreventHelp] = useState(false);
@@ -223,16 +225,20 @@ const Group2 = ({ setPart }) => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      moveIn(boxRef.current);
+    if (firstTime && !infoOverlay) {
+      setFirstTime(false);
 
       setTimeout(() => {
-        dispatch({ type: "setDisable", payload: false });
+        moveIn(boxRef.current);
 
-        startAnimation();
+        setTimeout(() => {
+          dispatch({ type: "setDisable", payload: false });
+
+          startAnimation();
+        }, 500);
       }, 500);
-    }, 500);
-  }, []);
+    }
+  }, [firstTime, infoOverlay]);
 
   const handleCheck = (index) => {
     dispatch({ type: "setDisable", payload: true });

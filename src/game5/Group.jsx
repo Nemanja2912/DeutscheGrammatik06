@@ -1,7 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GuessWord from "../UI/GuessWord";
 
-const Group = ({ item, setGroupIndex, groupIndex, index, style, last }) => {
+const Group = ({
+  item,
+  setGroupIndex,
+  groupIndex,
+  index,
+  style,
+  last,
+  keyboardGlobal,
+  setKeyboardGlobal,
+}) => {
   const [helpOverlay, setHelpOverlay] = useState(false);
   const [helpFingerPosition, setHelpFingerPosition] = useState("disable");
   const [preventHelp, setPreventHelp] = useState(false);
@@ -15,8 +24,9 @@ const Group = ({ item, setGroupIndex, groupIndex, index, style, last }) => {
   );
   const [infoOverlay, setInfoOverlay] = useState(index === 0);
 
-  const [disable, setDisable] = useState(false);
+  const [firstTime, setFirstTime] = useState(true);
   const [keyboardStatus, setKeyboardStatus] = useState(false);
+  const [disable, setDisable] = useState(false);
 
   const handleSuccess = () => {
     setDisable(true);
@@ -24,6 +34,8 @@ const Group = ({ item, setGroupIndex, groupIndex, index, style, last }) => {
 
   const returnKeyboardStatus = (status) => {
     setKeyboardStatus(status);
+
+    setKeyboardGlobal(status);
   };
 
   const handleNext = () => {
@@ -43,6 +55,19 @@ const Group = ({ item, setGroupIndex, groupIndex, index, style, last }) => {
       setGroupIndex();
     }
   };
+
+  useEffect(() => {
+    if (firstTime && !infoOverlay && keyboardGlobal) {
+      setFirstTime(false);
+
+      setTimeout(
+        () => {
+          setKeyboardStatus(true);
+        },
+        index === 0 ? 0 : 750
+      );
+    }
+  }, [firstTime, infoOverlay]);
 
   return (
     <>

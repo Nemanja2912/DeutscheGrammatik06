@@ -31,7 +31,7 @@ const messages = [
 
 const rest1 = [
   {
-    line: [["Wie", "fahrt", "ihr", "nach", "Marburg"]],
+    line: [["Wie", "fahrt", "ihr", "nach", "Marburg?"]],
     element: [[1]],
     following: [[0]],
     optionLevel: 2,
@@ -41,20 +41,20 @@ const rest1 = [
 const rest2 = [
   {
     line: [
-      ["Gut", "Dann", "kommt", "ihr", "gegen", "12:30", "nach", "Marburg"],
+      ["Gut", "Dann", "kommt", "ihr", "gegen", "12:30", "nach", "Marburg,"],
     ],
     element: [[2]],
     following: [[3]],
   },
   {
-    line: [["Wer", "kommt", "noch"]],
+    line: [["Wer", "kommt", "noch?"]],
     element: [[1]],
     following: [[0]],
   },
   {
     line: [
       ["Sebastian und Ulrike", "warten", "in", "Marburg"],
-      ["auf", "uns.", "Sie", "fahren", "mit", "dem", "Auto"],
+      ["auf", "uns.", "Sie", "fahren", "mit", "dem", "Auto."],
     ],
     element: [[1], [3]],
     following: [[0], [2]],
@@ -101,7 +101,7 @@ const messagesOption1 = [
     {
       line: [
         ["Toll!", "Ich", "habe", "Zeit.", "Ich", "komme", "mit", "meiner"],
-        ["Cousine"],
+        ["Cousine."],
       ],
       element: [[2, 5], []],
       following: [[1, 4], []],
@@ -129,7 +129,7 @@ const messagesOption1 = [
 const messagesOption2 = [
   [
     {
-      line: [["Wir", "fahren", "mit", "dem", "Zug", "um", "12:07"]],
+      line: [["Wir", "fahren", "mit", "dem", "Zug", "um", "12:07."]],
       element: [[1]],
       following: [[0]],
     },
@@ -479,8 +479,16 @@ const Game1 = ({ nextLesson }) => {
           followElement.style.opacity = 0;
           element.style.opacity = 0;
 
-          if (!child.innerHTML.includes("Sebastian")) {
+          if (
+            !child.innerHTML.includes("Sebastian") &&
+            !child.innerHTML.includes("Bäckerei") &&
+            !child.innerHTML.includes("Stück")
+          ) {
             child.style.textTransform = "lowercase";
+          }
+
+          if (child.innerHTML.includes("Stück")) {
+            child.innerHTML = "ein Stück Kuchen schmeckt";
           }
 
           setTimeout(() => {

@@ -61,8 +61,16 @@ const MessageBox = ({
     followElement.style.opacity = 0;
     element.style.opacity = 0;
 
-    if (!child.innerHTML.includes("Sebastian")) {
+    if (
+      !child.innerHTML.includes("Sebastian") &&
+      !child.innerHTML.includes("Bäckerei") &&
+      !child.innerHTML.includes("Stück")
+    ) {
       child.style.textTransform = "lowercase";
+    }
+
+    if (child.innerHTML.includes("Stück")) {
+      child.innerHTML = "ein Stück Kuchen schmeckt";
     }
 
     setTimeout(() => {

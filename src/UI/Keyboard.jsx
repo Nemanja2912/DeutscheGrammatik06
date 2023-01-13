@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Del from "../assets/img/SVG/backspace.svg";
 import Enter from "../assets/img/SVG/enter.svg";
@@ -57,6 +57,10 @@ const Keyboard = ({
 }) => {
   const [show, setShow] = useState(keyboardStatus);
   const [shiftActive, setShiftActive] = useState(false);
+
+  useEffect(() => {
+    setShow(keyboardStatus);
+  }, [keyboardStatus]);
 
   const keyboardStyle = {
     position: "absolute",

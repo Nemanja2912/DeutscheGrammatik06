@@ -66,6 +66,8 @@ const list = [
 const Game5 = () => {
   const [groupIndex, setGroupIndex] = useState(0);
 
+  const [keyboardGlobal, setKeyboardGlobal] = useState(true);
+
   return (
     <>
       <div className="game5">
@@ -73,6 +75,8 @@ const Game5 = () => {
           (item, index) =>
             groupIndex >= index && (
               <Group
+                keyboardGlobal={keyboardGlobal}
+                setKeyboardGlobal={setKeyboardGlobal}
                 index={index}
                 last={index === list.length - 1}
                 key={index}
