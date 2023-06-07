@@ -176,7 +176,7 @@ const Screen2 = ({ movePos, changePos, item, changeItem, navButtonRef }) => {
               {item === 0
                 ? "Du arbeitest mit einem Chat. In diesem Chat gibt es viele Verben."
                 : item === 1
-                ? "Du teilst die Wörter mit einer Schere und siehst Animationen."
+                ? "Du arbeitest weiter mit den Verben aus dem Chat."
                 : item === 2
                 ? "Wie bildet man das Präsens?"
                 : item === 3
